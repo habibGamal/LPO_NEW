@@ -191,6 +191,11 @@ export default function Meeting({ meeting = null }: { meeting?: MeetingModel | n
                             </>
                         )}
                     </Form.List>
+                    <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
+                        <Button type="primary" htmlType="submit">
+                            Save
+                        </Button>
+                    </Form.Item>
                 </Form>
                 {
                     meeting &&

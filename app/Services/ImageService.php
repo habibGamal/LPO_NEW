@@ -142,7 +142,7 @@ class PathDataStructure
      */
     function __construct($existingEncodedImages = '[]')
     {
-        $this->existingImages = json_decode($existingEncodedImages,true);
+        $this->existingImages = json_decode($existingEncodedImages, true);
     }
     /**
      * save images and return paths
@@ -179,10 +179,12 @@ class PathDataStructure
     function edit($editableNode)
     {
         $node = &$this->existingImages[$editableNode['id']];
-        if ($node['image'] != null)
+        if (key_exists('image', $editableNode)) {
             $node['path'] = $this->saveImageAndGetPath($editableNode['image']);
-        unset($editableNode['image']);
-        $node['data'] = $node;
+            unset($editableNode['image']);
+        }
+        unset($editableNode['id']);
+        $node['data'] = $editableNode;
     }
     /**
      * delete node by its id

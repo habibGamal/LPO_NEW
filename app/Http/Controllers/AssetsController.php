@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assets;
 use App\Services\ImageService;
+use App\Services\VideosGroupsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -16,9 +17,19 @@ class AssetsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($name)
     {
-        return Inertia::render('Assets');
+        $assets = Assets::where('name', $name)->first();
+        if ($assets == null)
+            return back();
+        if ($assets->assets_type == 'images')
+            return Inertia::render('Assets/ImagesIndex', [
+                'assetsDB' => $assets
+            ]);
+        if ($assets->assets_type == 'videos')
+            return Inertia::render('Assets/VideosIndex', [
+                'assetsDB' => $assets
+            ]);
     }
     /**
      * Display a listing of the resource.
@@ -38,48 +49,125 @@ class AssetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function insert(Request $request, ImageService $imageService)
+    public function insertImages(Request $request, ImageService $imageService)
     {
         // -----------------------------
         $request->validate([
             'name' => 'required|string',
-            'assets_type' => [Rule::in('images', 'videos')],
+            'assets_type' => Rule::in(['images']),
             'content' => 'required|array',
         ]);
         $assets = Assets::where('name', $request->name)->first();
-
-        $content = $imageService->pathDataStructure($assets ? $assets->content : '[]');
-
-        if ($assets == null) {
-            $content->create($request->content);
-            // dump($assets);
-            // exit;
-            Assets::create([
-                'name' => $request->name,
-                'assets_type' => $request->assets_type,
-                'content' => json_encode($content->getImages()),
-            ]);
-        } else {
-            $content->append($request->content);
-            $assets->content = json_encode($content->getImages());
-            $assets->save();
-        }
+        $content = $imageService->pathDataStructure($assets->content);
+        $content->append($request->content);
+        $assets->content = json_encode($content->getImages());
+        $assets->save();
+        return back();
+    }
+    /**
+     * Insert assets.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function insertVideosGroup(Request $request, VideosGroupsService $videosService)
+    {
+        // -----------------------------
+        $request->validate([
+            'name' => 'required|string',
+            'assets_type' => Rule::in(['videos']),
+            'group_name' => 'required|string',
+            'videos' => 'required|array',
+        ]);
+        $assets = Assets::where('name', $request->name)->first();
+        $content = $videosService->from($assets->content);
+        $content->append($request->group_name, $request->videos);
+        $assets->content = $content->getData();
+        $assets->save();
         return back();
     }
 
 
-    public function remove(Request $request)
+    /**
+     * Insert assets.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function editImages(Request $request, ImageService $imageService)
     {
+
+        // -----------------------------
         $request->validate([
             'name' => 'required|string',
-            'content_item' => 'required|string'
+            'assets_type' => Rule::in(['images']),
+            'content' => 'required|array',
         ]);
-        $assets = Assets::where('name', $request->name);
-        $content = json_decode($assets->content);
-        // delete removed assets
-        Storage::delete('/public/images/' . $request->content_item);
-        unset($content[intval(array_search($assets, $content))]);
-        $assets->content = json_encode($content);
+        $assets = Assets::where('name', $request->name)->first();
+        $content = $imageService->pathDataStructure($assets->content);
+        $content->edit($request->content);
+        $assets->content = json_encode($content->getImages());
+        $assets->save();
+        return back();
+    }
+    /**
+     * edit assets.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function editVideosGroup(Request $request, VideosGroupsService $videosService)
+    {
+        // -----------------------------
+        $request->validate([
+            'name' => 'required|string',
+            'assets_type' => Rule::in(['videos']),
+            'group_id' => 'required|string',
+            'group_name' => 'required|string',
+            'videos' => 'required|array',
+        ]);
+        $assets = Assets::where('name', $request->name)->first();
+        $content = $videosService->from($assets->content);
+        $content->edit($request->group_id, $request->group_name, $request->videos);
+        $assets->content = $content->getData();
+        $assets->save();
+        return back();
+    }
+    /**
+     * remove assets.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function removeVideosGroup(Request $request, VideosGroupsService $videosService)
+    {
+        // -----------------------------
+        $request->validate([
+            'name' => 'required|string',
+            'assets_type' => Rule::in(['videos']),
+            'group_id' => 'required|string',
+        ]);
+        $assets = Assets::where('name', $request->name)->first();
+        $content = $videosService->from($assets->content);
+        $content->delete($request->group_id);
+        $assets->content = $content->getData();
+        $assets->save();
+        return back();
+    }
+
+
+    public function removeImage(Request $request,ImageService $imageService)
+    {
+        // -----------------------------
+        $request->validate([
+            'name' => 'required|string',
+            'assets_type' => Rule::in(['images']),
+            'node_id' => 'required|string',
+        ]);
+        $assets = Assets::where('name', $request->name)->first();
+        $content = $imageService->pathDataStructure($assets->content);
+        $content->remove($request->node_id);
+        $assets->content = json_encode($content->getImages());
         $assets->save();
         return back();
     }

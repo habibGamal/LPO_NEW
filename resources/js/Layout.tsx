@@ -13,17 +13,9 @@ import { Button } from './lib/Antd';
 // import Button from 'antd/lib/button';
 import message from 'antd/lib/message';
 import { Assets } from './Models/Assets';
+import SemiAuth from './Components/SemiAuth';
 export default function Layout(props: { children: JSX.Element }) {
     const toTopBtn = useRef<HTMLButtonElement>(null);
-    useEffect(() => {
-        let loading: any;
-        Inertia.on('start', () => {
-            loading = message.loading('', 0);
-        })
-        Inertia.on('finish', () => {
-            setTimeout(loading)
-        })
-    }, [])
     const [showNav, setShowNav] = useState(false);
     const [appState, setAppState] = useContext(ContextApi)!;
     const hideNav = () => {
@@ -60,11 +52,11 @@ export default function Layout(props: { children: JSX.Element }) {
                             <ul className={`${showNav ? 'translate-x-0 opacity-100' : t('-translate-x-full opacity-0', 'translate-x-full opacity-0')}  ${t('left-0', 'right-0')} flex nav transition-all shadow 2xl:translate-x-0 2xl:opacity-100 2xl:shadow-none 2xl:items-center items-start 2xl:flex gap-6 font-bold`}>
                                 <NavLink onClick={hideNav} href="/" name={t('الرئيسية', 'Home')} />
                                 <NavLink onClick={hideNav} href="/about" name={t('عنا', 'About')} />
-                                <NavLink onClick={hideNav} href="/images_show" name={t('الصور', 'Images')} />
-                                <NavLink onClick={hideNav} href={Assets.index()} name={t('صور وفيديوهات', 'Images & Videos')} />
+                                {/* <NavLink onClick={hideNav} href="/images_show" name={t('الصور', 'Images')} /> */}
+                                <NavLink onClick={hideNav} href="/assets" name={t('صور وفيديوهات', 'Images & Videos')} />
                                 <NavLink onClick={hideNav} href="/books" name={t('المواد', 'Material')} />
                                 <NavLink onClick={hideNav} href="/articles" name={t('معلومات عن البيانو', 'Piano Info')} />
-                                <NavLink onClick={hideNav} href="/meetings" name={t('جلسات زووم', 'Zoom Meetings')} />
+                                <NavLink onClick={hideNav} href="/meetings" name={t('الجلسات', 'Meetings')} />
                                 <NavLink onClick={hideNav} href="/quiz" name={t('الامتحانات', 'Quiz')} />
                                 <NavLink onClick={hideNav} href="/about-program" name={t('عن البرنامج', 'About Program')} />
                                 <NavLink onClick={hideNav} href="/contact" name={t('تواصل معنا', 'Contact')} />
@@ -72,9 +64,9 @@ export default function Layout(props: { children: JSX.Element }) {
                                 <Admin>
                                     <NavLink onClick={hideNav} href="/dashboard" name={t('لوحة التحكم', 'Dashboard')} />
                                 </Admin>
-                                <Auth>
+                                <SemiAuth>
                                     <NavLink onClick={hideNav} href="/logout" name={t('تسجيل الخروج', 'Logout')} />
-                                </Auth>
+                                </SemiAuth>
                                 <NotAuth>
                                     <NavLink onClick={hideNav} href="/login" name={t('تسجيل الدخول', 'Login')} />
                                     <NavLink onClick={hideNav} href="/register" name={t('انشاء حساب', 'Register')} />

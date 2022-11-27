@@ -17,9 +17,17 @@ class MeetingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($category)
     {
-        return Inertia::render('Meetings/Index', ['meetingsDB' => Meeting::all()]);
+        if ($category === 'activity')
+            return Inertia::render('Meetings/Index', ['meetingsDB' => Meeting::whereIn('state', ['not_started', 'in_meeting'])->get()]);
+        if ($category === 'preivous')
+            return Inertia::render('Meetings/Index', ['meetingsDB' => Meeting::whereIn('state', ['ended'])->get()]);
+        if ($category === 'history')
+            return Inertia::render('Meetings/History', ['meetingsDB' => Meeting::select(['id', 'name', 'date', 'state'])->where('state', '!=', 'offline')->get()]);
+        if ($category === 'offline')
+            return Inertia::render('Meetings/Index', ['meetingsDB' => Meeting::where('state','offline')->get()]);
+        return back();
     }
 
     /**
@@ -63,7 +71,7 @@ class MeetingController extends Controller
             'link' => $request->input('meeting_link'),
             'date' => $request->input('date'),
             'state' => $request->input('state'),
-            'assets' => $assets->getImages(),
+            'assets' => json_encode($assets->getImages()),
             'videos' => json_encode($videos),
         ]);
         return Redirect::route('meetings.create');

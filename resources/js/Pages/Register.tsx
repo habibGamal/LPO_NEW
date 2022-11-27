@@ -7,6 +7,7 @@ import React, { useState } from 'react'
 import { countriesList } from '../countries-list';
 import useTranslate from '../Hooks/useTranslate';
 import { motion } from 'framer-motion';
+import MessagePage from '../Components/MessagePage';
 export default function Register() {
     const { errors } = usePage().props;
     const [regState, setRegState] = useState(false);
@@ -26,22 +27,11 @@ export default function Register() {
 
     return (
         regState ?
-            <div className="bg-ov-white">
-                <div className="container">
-                    <motion.div
-                        initial={{ scale: 0, opacity: 0 }}
-                        transition={{ duration: 1.3, delay: 0, type: 'spring' }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="grid grid-rows-[56%20%] grid-cols-1 2xl:grid-cols-2 2xl:grid-rows-1 justify-items-center items-center min-h-[calc(100vh-57px)] ">
-                        <div className='flex flex-col items-center'>
-                            <h2 className="text-2xl text-center md:text-3xl lg:text-4xl xl:text-5xl mb-4 lg:mb-8  font-bold uppercase">{t('تم التسجيل ', 'Registeration Done ')} <span className="highlight-header"> {t('بنجاح', 'Successfully ')}</span></h2>
-                            <FontAwesomeIcon size='6x' className='text-green-400 mt-8' icon={faCheckCircle} />
-                        </div>
-                        <img className='w-full max-w-[500px] 2xl:max-w-full' src="/images/reg_success.png" />
-                    </motion.div>
-                </div>
-            </div>
+            <MessagePage imgSrc='/images/reg_success.png'>
+                <h2 className="text-2xl text-center md:text-3xl lg:text-4xl xl:text-5xl mb-4 lg:mb-8  font-bold uppercase">{t('تم التسجيل ', 'Registeration Done ')} <span className="highlight-header"> {t('بنجاح', 'Successfully ')}</span></h2>
+                <FontAwesomeIcon size='6x' className='text-green-400 mt-8' icon={faCheckCircle} />
+                <span className='block my-8 underline text-xl'>{t('برجاء الذهاب الى بريدك الالكتروني لتأكيد حسابك', 'Go to your email and verfiy your account')}</span>
+            </MessagePage>
             :
             <div className="container">
                 <div className="rounded bg-slate-100 shadow-sm p-4 max-w-[600px] mx-auto my-16">

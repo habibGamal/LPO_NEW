@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
+use Illuminate\Auth\Events\Registered;
 use Inertia\Inertia;
 
 class StudentController extends Controller
@@ -22,7 +23,7 @@ class StudentController extends Controller
     public function index()
     {
         return Inertia::render('ManageStudents', [
-            'studentsDB' => Student::with('user')->get(),
+            'studentsDB' => Student::whereRelation('user', 'email_verified_at', '!=', null)->with('user')->get(),
         ]);
     }
 
@@ -60,13 +61,14 @@ class StudentController extends Controller
             'level' => ['required', Rule::in(['beginner', 'moderate', 'advanced'])],
         ]);
         $student = Student::create($validated);
-        User::create([
+        $user = User::create([
             'name' => $validated['firstName'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'student_id' => $student->id,
             'active' => false,
         ]);
+        event(new Registered($user));
         return back();
     }
 
@@ -96,7 +98,7 @@ class StudentController extends Controller
     {
         $usersId = $request->users;
         $users = User::select(['id', 'email'])->whereIn('id', $usersId)->get();
-        $emails = $users->map(function ($user){
+        $emails = $users->map(function ($user) {
             return $user->email;
         });
         User::whereIn('id', $usersId)->update(['active' => true]);
@@ -132,7 +134,7 @@ class StudentController extends Controller
         // dump($request->all());
         // exit;
         $users = User::select(['id', 'email'])->whereIn('id', $usersId)->get();
-        $emails = $users->map(function ($user){
+        $emails = $users->map(function ($user) {
             return $user->email;
         });
         User::whereIn('id', $usersId)->update(['active' => false]);

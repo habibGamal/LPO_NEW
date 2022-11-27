@@ -35,11 +35,14 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
-        $id = $request->user() ? $request->user()->id : 0;
+        $user = $request->user();
+        $id = $user ? $user->id : 0;
+        $active = $user ? $user->active : false;
         return array_merge(parent::share($request), [
 
             // Synchronously
-            'auth' => Auth::check(),
+            'auth' => Auth::check() && $active,
+            'semi_auth' => Auth::check(),
             'admin' => $id === 1
 
         ]);

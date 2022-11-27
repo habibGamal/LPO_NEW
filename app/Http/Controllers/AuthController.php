@@ -17,14 +17,19 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (!Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'active' => 1])) {
+        if (!Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
             throw ValidationException::withMessages([
                 'email' => [
-                    'Wrong credentials , make sure that your email & password is correct or you may not activated yet'
+                    'Wrong credentials , make sure that your email & password is correct'
                 ]
             ]);
         }
-
+        if (Auth::user()->email_verified_at == null) {
+            return Redirect::route('reverfing');
+        }
+        if (Auth::user()->active == 0) {
+            return Redirect::route('pending_activation');
+        }
         return Redirect::route('dashboard');
     }
 

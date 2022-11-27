@@ -259,6 +259,12 @@ input[type="file"] {
 .anticon {
     vertical-align: unset;
 }
+.ant-carousel .slick-dots li button {
+    background-color: #27304481;
+}
+.ant-carousel .slick-dots li.slick-active button {
+    background-color: #273044;
+}
 .meeting-iframe > iframe {
     width: 100%;
     height: unset;
@@ -269,4 +275,7 @@ input[type="file"] {
     width: 100%;
     height: unset;
     aspect-ratio: 16 / 9;
+}
+.resizable-title {
+    @apply text-2xl text-center md:text-3xl lg:text-4xl xl:text-5xl mb-4 lg:mb-8  font-bold uppercase;
 }
