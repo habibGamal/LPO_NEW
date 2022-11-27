@@ -8,7 +8,7 @@ import Choice from '../../Components/ChoiceCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Button, Carousel, Divider, Empty, Form, Input, message, Modal, Upload, UploadFile, UploadProps } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
+// import { useForm } from 'antd/lib/form/Form';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Inertia } from '@inertiajs/inertia';
 import { Assets as AssetsModel, AssetsDB, AssetsName, ImagesAssets, AssetsType } from '../../Models/Assets';
@@ -18,7 +18,7 @@ import Layout from './Layout';
 import AntdImgCrop from 'antd-img-crop';
 import Admin from '../../Components/Admin';
 const AddImages = ({ assets }: { assets: AssetsModel }) => {
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const uploadProps: UploadProps = {
         customRequest: ({ file, onSuccess }) => {
             setTimeout(() => {
@@ -106,7 +106,7 @@ const AddImages = ({ assets }: { assets: AssetsModel }) => {
     )
 }
 const EditImage = ({ node, name, close }: { node: ImagesAssets, name: AssetsName, close: () => void }) => {
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const [fileList, setFileList] = useState<UploadFile[]>(ImagesHandler.getPathsAsUploadFiles([node.rawPath]))
     const uploadProps: UploadProps = {
         customRequest: ({ file, onSuccess }) => {

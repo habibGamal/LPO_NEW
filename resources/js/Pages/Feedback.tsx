@@ -5,9 +5,9 @@ import useTranslate from "../Hooks/useTranslate";
 import { Form, Input, message } from "antd";
 import { usePage } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
-import { useForm } from "antd/lib/form/Form";
+// import { useForm } from "antd/lib/form/Form";
 export default function Feedback() {
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const {errors} = usePage().props;
     const t = useTranslate();
     const send = (values:any)=>{

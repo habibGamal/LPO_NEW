@@ -3,7 +3,7 @@ import useTranslate from '../../Hooks/useTranslate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Button, Divider, Empty, Form, Input, message, Modal, Tabs, Upload, UploadFile, UploadProps } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
+// import { useForm } from 'antd/lib/form/Form';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Inertia } from '@inertiajs/inertia';
 import { Assets as AssetsModel, AssetsDB, AssetsName, ImagesAssets, AssetsType, VideosAssets } from '../../Models/Assets';
@@ -11,7 +11,7 @@ import useModal from '../../Hooks/useModal';
 import Layout from './Layout';
 import Admin from '../../Components/Admin';
 const AddGroupOfVideos = ({ assets }: { assets: AssetsModel }) => {
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const submit = (values: any) => {
         Inertia.post(AssetsModel.insertVideos(), {
             ...values,
@@ -103,7 +103,7 @@ const AddGroupOfVideos = ({ assets }: { assets: AssetsModel }) => {
     )
 }
 const EditVideos = ({ group, name, close }: { group: VideosAssets, name: AssetsName, close: () => void }) => {
-    const [form] = useForm();
+    const [form] = Form.useForm();
     const submit = (values: any) => {
         Inertia.post(AssetsModel.editVideos(), {
             ...values,
