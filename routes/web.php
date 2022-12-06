@@ -34,14 +34,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-function directRender($path, $page)
-{
-
-    Route::get($path, function () use ($page) {
-        return Inertia::render($page);
-    });
-}
+// admin area
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
@@ -62,10 +55,50 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/assets/insert-images', [AssetsController::class, 'insertImages']);
     Route::post('/assets/edit-images', [AssetsController::class, 'editImages']);
     Route::post('/assets/remove-image', [AssetsController::class, 'removeImage']);
+    Route::get('/display-scores', function () {
+        return Inertia::render('DisplayScores', [
+            'scores' => Exam::orderByDesc('id')->get(),
+        ]);
+    });
+});
+// user area
+Route::middleware(['auth','activated'])->group(function () {
+
+
+
+    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+    Route::get('/books', [BookController::class, 'index'])->name('books.index');
+
+    Route::get('/meetings', function () {
+        return Inertia::render('Meetings/OnlineAndOffline');
+    });
+    Route::get('/meetings/online', function () {
+        return Inertia::render('Meetings/Online');
+    });
+    Route::get('/meetings/categories/{category}', [MeetingController::class, 'index'])->name('meetings.index');
+    Route::get('/meetings/{meeting}', [MeetingController::class, 'show'])->name('meetings.show');
+
+
+
+    Route::prefix('/quiz')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('Quiz');
+        });
+        Route::get('/pre-exam', function () {
+            return Inertia::render('QuizSamples/Exam', ['examType' => 'pre']);
+            // return redirect()->back();
+        });
+        Route::get('/post-exam', function () {
+            return Inertia::render('QuizSamples/Exam', ['examType' => 'post']);
+            // return redirect()->back();
+        });
+        Route::post('/check-exam', [ExamController::class, 'checking']);
+    });
 });
 
-
 // public routing
+
 Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
@@ -73,25 +106,12 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return Inertia::render('About');
 });
-
-Route::get('/images_show', function () {
-    return Inertia::render('Images');
+// Route::get('/images_show', function () {
+//     return Inertia::render('Images');
+// });
+Route::get('/about-program', function () {
+    return Inertia::render('AboutProgram');
 });
-
-
-Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
-Route::get('/books', [BookController::class, 'index'])->name('books.index');
-
-Route::get('/meetings', function () {
-    return Inertia::render('Meetings/OnlineAndOffline');
-});
-Route::get('/meetings/online', function () {
-    return Inertia::render('Meetings/Online');
-});
-Route::get('/meetings/categories/{category}', [MeetingController::class, 'index'])->name('meetings.index');
-Route::get('/meetings/{meeting}', [MeetingController::class, 'show'])->name('meetings.show');
-
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 });
@@ -106,31 +126,6 @@ Route::post('/feedback', function (Request $request) {
     ]);
     Mail::to('amaha6090@gmail.com')->send(new Feedback($request->feedback));
     return Redirect::back();
-});
-
-Route::prefix('/quiz')->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('Quiz');
-    });
-    Route::get('/pre-exam', function () {
-        return Inertia::render('QuizSamples/Exam', ['examType' => 'pre']);
-        // return redirect()->back();
-    });
-    Route::get('/post-exam', function () {
-        return Inertia::render('QuizSamples/Exam', ['examType' => 'post']);
-        // return redirect()->back();
-    });
-    Route::post('/check-exam', [ExamController::class, 'checking']);
-});
-
-Route::get('/display-scores', function () {
-    return Inertia::render('DisplayScores', [
-        'scores' => Exam::orderByDesc('id')->get(),
-    ]);
-});
-
-Route::get('/about-program', function () {
-    return Inertia::render('AboutProgram');
 });
 // register - verification
 Route::get('/register', [StudentController::class, 'create'])->middleware('guest');

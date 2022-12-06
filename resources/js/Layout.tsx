@@ -52,12 +52,14 @@ export default function Layout(props: { children: JSX.Element }) {
                             <ul className={`${showNav ? 'translate-x-0 opacity-100' : t('-translate-x-full opacity-0', 'translate-x-full opacity-0')}  ${t('left-0', 'right-0')} flex nav transition-all shadow 2xl:translate-x-0 2xl:opacity-100 2xl:shadow-none 2xl:items-center items-start 2xl:flex gap-6 font-bold`}>
                                 <NavLink onClick={hideNav} href="/" name={t('الرئيسية', 'Home')} />
                                 <NavLink onClick={hideNav} href="/about" name={t('عنا', 'About')} />
-                                {/* <NavLink onClick={hideNav} href="/images_show" name={t('الصور', 'Images')} /> */}
                                 <NavLink onClick={hideNav} href="/assets" name={t('صور وفيديوهات', 'Images & Videos')} />
-                                <NavLink onClick={hideNav} href="/books" name={t('المواد', 'Material')} />
-                                <NavLink onClick={hideNav} href="/articles" name={t('معلومات عن البيانو', 'Piano Info')} />
-                                <NavLink onClick={hideNav} href="/meetings" name={t('الجلسات', 'Meetings')} />
-                                <NavLink onClick={hideNav} href="/quiz" name={t('الامتحانات', 'Quiz')} />
+                                <Auth>
+                                    <NavLink onClick={hideNav} href="/books" name={t('المواد', 'Material')} />
+                                    <NavLink onClick={hideNav} href="/articles" name={t('معلومات عن البيانو', 'Piano Info')} />
+                                    <NavLink onClick={hideNav} href="/meetings" name={t('الجلسات', 'Meetings')} />
+                                    <NavLink onClick={hideNav} href="/quiz" name={t('الامتحانات', 'Quiz')} />
+                                </Auth>
+                                {/* <NavLink onClick={hideNav} href="/images_show" name={t('الصور', 'Images')} /> */}
                                 <NavLink onClick={hideNav} href="/about-program" name={t('عن البرنامج', 'About Program')} />
                                 <NavLink onClick={hideNav} href="/contact" name={t('تواصل معنا', 'Contact')} />
                                 <NavLink onClick={hideNav} href="/feedback" name={t('انطباعك', 'Feedback')} />

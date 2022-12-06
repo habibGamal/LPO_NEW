@@ -2,11 +2,10 @@ import React from 'react'
 import useTranslate from '../../Hooks/useTranslate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Button, Divider, Empty, Form, Input, message, Modal, Tabs, Upload, UploadFile, UploadProps } from 'antd';
-// import { useForm } from 'antd/lib/form/Form';
+import { Button, Divider, Empty, Form, Input, message, Modal, Tabs } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Inertia } from '@inertiajs/inertia';
-import { Assets as AssetsModel, AssetsDB, AssetsName, ImagesAssets, AssetsType, VideosAssets } from '../../Models/Assets';
+import { Assets as AssetsModel, AssetsDB, AssetsName, AssetsType, VideosAssets } from '../../Models/Assets';
 import useModal from '../../Hooks/useModal';
 import Layout from './Layout';
 import Admin from '../../Components/Admin';
