@@ -19,6 +19,10 @@ class Student extends Model
         'firstLanguage',
         'secondLanguage',
         'level',
+        'can_exam',
+        'is_in_exam',
+        'score',
+        'start_time',
     ];
 
     public $timestamps = false;

@@ -3,15 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Services\ExamService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ExamController extends Controller
 {
+
+    public function goToExam(Request $request, ExamService $examService)
+    {
+        $student = $request->user()->student;
+        if (!$student->can_exam)
+            return back();
+        if (!$student->is_in_exam) {
+            $examService->createSession($student);
+            return Inertia::render('QuizSamples/Exam', ['time' => intval($student->start_time)]);
+        }
+        // dump(intval($student->start_time) + 20 * 60 , time());
+        // exit;
+        if ($examService->isSessionValid($student))
+            return Inertia::render('QuizSamples/Exam', ['time' => intval($student->start_time)]);
+        $examService->endSession($student);
+        return back();
+    }
+
     public function checking(Request $request)
     {
         $request->validate([
-            "name" => "required|string",
             "q-0" => "required|string",
             "q-1" => "required|string",
             "q-2" => "required|string",
@@ -46,21 +64,20 @@ class ExamController extends Controller
             "q-14" => "true",
         ];
         $exam = $request->all();
-        unset($exam['name']);
-        unset($exam['exam_type']);
         $wrongAns = [];
         foreach ($exam as $q => $a) {
             if (array_key_exists($q, $RIGHT_ANS))
                 if ($RIGHT_ANS[$q] !== $a)
                     $wrongAns[$q] = $RIGHT_ANS[$q];
         }
-        Exam::create([
-            'name' => $request->name,
-            'score' => 15 - count($wrongAns),
-            'exam_type' => $request->exam_type,
-        ]);
+
+        $student = $request->user()->student;
+        $student->can_exam = false;
+        $student->is_in_exam = false;
+        $student->score = 15 - count($wrongAns);
+        $student->save();
         return Inertia::render('QuizSamples/Exam', [
-            'examType'=> $request->exam_type,
+            'time' => $student->start_time,
             'wrongAns' => $wrongAns,
         ]);
     }

@@ -74,46 +74,66 @@ const TFQuestions = [
     'الخط الثاني في مدرج صول يسمى مي',
     'من شروط الجلسة الصحيحة لآلة البيانو الجلوس على حافة مقعد البيانو ومحاذاة الرأس والكتف',
 ]
-export default function Exam({ wrongAns,examType }: { wrongAns?: { [key: string]: string },examType:string }) {
+const secondsToTimer = (spendedTime: number) => {
+    const allowedTime = 20 * 60;
+    const remainingTime = allowedTime - spendedTime;
+    const minutes = Math.floor(remainingTime / 60)
+    const seconds = remainingTime - minutes * 60;
+    return [minutes, seconds];
+}
+export default function Exam({ wrongAns, time }: { wrongAns?: { [key: string]: string }, time: number }) {
     const form = useRef(null);
+    const [currentTime, setCurrentTime] = useState(Math.floor(Date.now() / 1000));
     const errors = usePage().props.errors;
     const isExamSubmited = wrongAns ? true : false;
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(form.current!);
-        formData.append('exam_type', examType);
         if (!isExamSubmited) {
             Inertia.post('/quiz/check-exam', formData, { preserveScroll: true });
         }
     }
     const validForm = Object.keys(errors).length > 0;
-
+    const timer = secondsToTimer(currentTime - time);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTime(t => t + 1)
+        }, 1000);
+        if(timer[0] === 0 && timer[1] ===0){
+            Inertia.get('/');
+        }
+        return () => {
+            clearInterval(interval);
+        }
+    }, []);
     return (
-        <form ref={form} className="container relative rtl" onSubmit={onSubmit} >
-            <h2 className="page-title">Quiz 1</h2>
-            <input required type="text" name="name" id="name" placeholder="ادخل اسمك" className="rounded bg-gray-50 border  focus-within:outline-second mb-8 text-xl p-4" />
-            <div className="content grid grid-cols-auto lg:grid-cols-2 items-start gap-8">
-                {
-                    choiceQuestions.map(({ q, a }, key) => <ChoiceQ key={key} id={`q-${key}`} question={q} choices={a} correction={wrongAns?.[`q-${key}`]} />)
-                }
-                {
-                    TFQuestions.map((q, key) => <TFQ key={key} id={`q-${key + choiceQuestions.length}`} question={q} correction={wrongAns?.[`q-${key + choiceQuestions.length}`]} />)
-                }
-            </div>
-            {
-                wrongAns &&
-                <div className="rounded shadow p-4 bg-second  my-8 w-fit mx-auto">
-                    <h4 className="text-xl text-white">درجتك : {15 - Object.keys(wrongAns).length}/15 </h4>
+        <>
+            <div className="fixed rounded-r-full p-4 bg-red-400 text-white left-0 mt-4 font-bold">{timer[0]}:{timer[1]}</div>
+            <form ref={form} className="container relative rtl" onSubmit={onSubmit} >
+                <h2 className="page-title">Quiz 1</h2>
+                <div className="content grid grid-cols-auto lg:grid-cols-2 items-start gap-8">
+                    {
+                        choiceQuestions.map(({ q, a }, key) => <ChoiceQ key={key} id={`q-${key}`} question={q} choices={a} correction={wrongAns?.[`q-${key}`]} />)
+                    }
+                    {
+                        TFQuestions.map((q, key) => <TFQ key={key} id={`q-${key + choiceQuestions.length}`} question={q} correction={wrongAns?.[`q-${key + choiceQuestions.length}`]} />)
+                    }
                 </div>
-            }
-            {
-                validForm &&
-                <p className="text-center text-red-600">
-                    *برجاء ادخال الاسم والاجابة عن كل الاسئلة
-                </p>
-            }
-            <button className="block mx-auto my-8 btn">Submit</button>
-        </form>
+                {
+                    wrongAns &&
+                    <div className="rounded shadow p-4 bg-second  my-8 w-fit mx-auto">
+                        <h4 className="text-xl text-white">درجتك : {15 - Object.keys(wrongAns).length}/15 </h4>
+                    </div>
+                }
+                {
+                    validForm &&
+                    <p className="text-center text-red-600">
+                        *برجاء ادخال الاسم والاجابة عن كل الاسئلة
+                    </p>
+                }
+                <button className="block mx-auto my-8 btn">Submit</button>
+            </form>
+        </>
     )
 }
 
