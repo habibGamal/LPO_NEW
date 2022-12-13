@@ -13,8 +13,12 @@ class ExamController extends Controller
     public function goToExam(Request $request, ExamService $examService)
     {
         $student = $request->user()->student;
-        if (!$student->can_exam)
-            return back();
+        if (!$student->can_exam) {
+            if ($student->score !== null)
+                return Inertia::render('QuizSamples/StudentScore',['score'=>$student->score]);
+            else
+                return Inertia::render('QuizSamples/Forbidden');
+        }
         if (!$student->is_in_exam) {
             $examService->createSession($student);
             return Inertia::render('QuizSamples/Exam', ['time' => intval($student->start_time)]);

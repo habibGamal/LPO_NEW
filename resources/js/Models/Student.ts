@@ -11,6 +11,7 @@ export type StudentDB = {
     firstLanguage: string,
     secondLanguage: string,
     level: string,
+    score:number|null,
     user: {
         id: number,
         email: string,
@@ -34,6 +35,7 @@ export class Student {
     public level: string;
     public active: number;
     public activationControl: any;
+    public score: number|null;
     constructor(student: StudentDB) {
         this.id = this.key = student.id;
         this.firstName = student.firstName;
@@ -44,6 +46,7 @@ export class Student {
         this.country = student.country;
         this.firstLanguage = student.firstLanguage;
         this.secondLanguage = student.secondLanguage;
+        this.score = student.score;
         this.level = student.level;
         this.userId = student.user.id;
         this.email = student.user.email;

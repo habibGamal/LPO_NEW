@@ -48,6 +48,11 @@ const columns: ColumnsType<Student> = [
         }
     },
     {
+        title: 'Score',
+        dataIndex: 'score',
+        render: (score: number|null) => score !== null?score:'-'
+    },
+    {
         title: 'Activated',
         dataIndex: '',
         render: (student: Student) => {
