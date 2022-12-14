@@ -85,9 +85,9 @@ Route::middleware(['auth','activated'])->group(function () {
 
         Route::get('/post-exam', function () {
             return Inertia::render('QuizSamples/Exam', ['examType' => 'post']);
-            // return redirect()->back();
         });
         Route::post('/check-exam', [ExamController::class, 'checking']);
+        Route::get('/check-exam',[ExamController::class,'goToExam']);
     });
 });
 

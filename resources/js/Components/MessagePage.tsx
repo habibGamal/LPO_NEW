@@ -3,8 +3,10 @@ import { motion } from 'framer-motion'
 interface MessagePageProps {
     imgSrc: string;
     children: React.ReactNode;
+    girdRowsRatios?:[number,number]
 }
-export default function MessagePage({ imgSrc, children }: MessagePageProps) {
+export default function MessagePage({ girdRowsRatios,imgSrc, children }: MessagePageProps) {
+    const [first,second] = girdRowsRatios || [56,20]
     return (
         <div className="bg-ov-white">
             <div className="container">
@@ -13,7 +15,7 @@ export default function MessagePage({ imgSrc, children }: MessagePageProps) {
                     transition={{ duration: 1.3, delay: 0, type: 'spring' }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
-                    className="grid grid-rows-[56%20%] grid-cols-1 2xl:grid-cols-2 2xl:grid-rows-1 justify-items-center items-center min-h-[calc(100vh-57px)] ">
+                    className={`grid grid-rows-[${first}%${second}%] grid-cols-1 2xl:grid-cols-2 2xl:grid-rows-1 justify-items-center items-center min-h-[calc(100vh-57px)]`}>
                     <div className='flex flex-col items-center'>
                         {
                             children

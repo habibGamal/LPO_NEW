@@ -6,7 +6,7 @@ import useTranslate from '../../Hooks/useTranslate';
 export default function StudentScore({score}:{score:number}) {
     const t = useTranslate();
     return (
-        <MessagePage imgSrc={`/images/${score>10 ? 'success':'failure'}_score.png`}>
+        <MessagePage girdRowsRatios={[50,50]} imgSrc={`/images/${score>10 ? 'success':'failure'}_score.png`}>
             <h2 className='resizable-title'>
                 {t('درجتك', 'You score')}
             </h2>

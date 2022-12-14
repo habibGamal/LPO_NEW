@@ -58,14 +58,15 @@ class ExamController extends Controller
             "q-4" => "q-4-a-1",
             "q-5" => "q-5-a-2",
             "q-6" => "q-6-a-0",
-            "q-7" => "true",
-            "q-8" => "false",
+            "q-7" => "q-7-a-0",
+            "q-8" => "true",
             "q-9" => "false",
-            "q-10" => "true",
+            "q-10" => "false",
             "q-11" => "true",
-            "q-12" => "false",
+            "q-12" => "true",
             "q-13" => "false",
-            "q-14" => "true",
+            "q-14" => "false",
+            "q-15" => "true",
         ];
         $exam = $request->all();
         $wrongAns = [];

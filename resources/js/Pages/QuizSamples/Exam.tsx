@@ -63,6 +63,14 @@ const choiceQuestions = [
             '66 مفتاحاً',
         ]
     },
+    {
+        q: "تصنع المفاتيح للبيانوهات الغالية من ",
+        a: [
+            'عاج الفيل',
+            'خشب الزان',
+            'البلاستيك المقوى',
+        ]
+    }
 ]
 const TFQuestions = [
     'السلم الموسيقي: هو مجموعة من النوتات الموسيقية مرتبة حسب التردد الأساسي أو طبقة الصوت، يتفرع إلى سبع نغمات ',
@@ -99,7 +107,7 @@ export default function Exam({ wrongAns, time }: { wrongAns?: { [key: string]: s
         const interval = setInterval(() => {
             setCurrentTime(t => t + 1)
         }, 1000);
-        if(timer[0] === 0 && timer[1] ===0){
+        if (timer[0] === 0 && timer[1] === 0) {
             Inertia.get('/');
         }
         return () => {
@@ -118,11 +126,20 @@ export default function Exam({ wrongAns, time }: { wrongAns?: { [key: string]: s
                     {
                         TFQuestions.map((q, key) => <TFQ key={key} id={`q-${key + choiceQuestions.length}`} question={q} correction={wrongAns?.[`q-${key + choiceQuestions.length}`]} />)
                     }
+                    <div>
+                        <p className="question">تكلم في نقاط عن تطور اله البيانو ؟</p>
+                        <textarea className="bg-slate-50 text-xl" placeholder="اكتب اجابتك هنا..." cols={50} name="assay-q-1" id="assay-q-1"></textarea>
+                    </div>
+                    <div>
+                        <p className="question">اذكر اشكال البيانو ؟</p>
+                        <textarea className="bg-slate-50 text-xl" placeholder="اكتب اجابتك هنا..." cols={50} name="assay-q-2" id="assay-q-2"></textarea>
+                    </div>
                 </div>
+
                 {
                     wrongAns &&
                     <div className="rounded shadow p-4 bg-second  my-8 w-fit mx-auto">
-                        <h4 className="text-xl text-white">درجتك : {15 - Object.keys(wrongAns).length}/15 </h4>
+                        <h4 className="text-xl text-white">درجتك : {20 - Object.keys(wrongAns).length}/20 </h4>
                     </div>
                 }
                 {
