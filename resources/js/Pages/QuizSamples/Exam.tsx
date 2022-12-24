@@ -1,10 +1,8 @@
 import { FormEvent, useEffect, useState, useRef } from "react";
 import React from "react";
-import useTranslate from "../../Hooks/useTranslate";
 import MultibleChoiceInput from "../../Components/MultibleChoiceInput"
 import TrueFalseInput from "../../Components/TrueFalseInput"
 import { Inertia } from "@inertiajs/inertia";
-import { Popconfirm } from "antd";
 import { usePage } from "@inertiajs/inertia-react";
 const choiceQuestions = [
     {
@@ -131,7 +129,7 @@ export default function Exam({ wrongAns, time }: { wrongAns?: { [key: string]: s
                         <textarea className="bg-slate-50 text-xl" placeholder="اكتب اجابتك هنا..." cols={50} name="assay-q-1" id="assay-q-1"></textarea>
                     </div>
                     <div>
-                        <p className="question">اذكر اشكال البيانو ؟</p>
+                        <p className="question">اذكر انواع البيانو ؟</p>
                         <textarea className="bg-slate-50 text-xl" placeholder="اكتب اجابتك هنا..." cols={50} name="assay-q-2" id="assay-q-2"></textarea>
                     </div>
                 </div>
