@@ -1,4 +1,4 @@
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import { Meeting as MeetingModel } from '../Models/Meeting';

@@ -1,4 +1,4 @@
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlay } from '@fortawesome/free-solid-svg-icons/faCirclePlay'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { Book, BookDB } from "../../Models/Book";

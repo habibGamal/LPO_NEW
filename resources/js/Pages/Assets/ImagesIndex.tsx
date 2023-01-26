@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion';
-import { animateUp } from '../../Animation/Up';
 import useTranslate from '../../Hooks/useTranslate';
-import Steps from '../../Components/Steps';
-import useSteps from '../../Hooks/useSteps';
-import Choice from '../../Components/ChoiceCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight'
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit'
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash'
 import { Button, Carousel, Divider, Empty, Form, Input, message, Modal, Upload, UploadFile, UploadProps } from 'antd';
 // import { useForm } from 'antd/lib/form/Form';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'

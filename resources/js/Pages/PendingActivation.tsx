@@ -1,7 +1,5 @@
-import { faLock, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+import { faLock } from '@fortawesome/free-solid-svg-icons/faLock'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Inertia } from '@inertiajs/inertia'
-import { Button } from 'antd'
 import React from 'react'
 import MessagePage from '../Components/MessagePage'
 import useTranslate from '../Hooks/useTranslate'

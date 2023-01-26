@@ -1,4 +1,4 @@
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-react';
@@ -6,7 +6,6 @@ import { Button, DatePicker, Form, Input, InputNumber, Radio, Select } from 'ant
 import React, { useState } from 'react'
 import { countriesList } from '../countries-list';
 import useTranslate from '../Hooks/useTranslate';
-import { motion } from 'framer-motion';
 import MessagePage from '../Components/MessagePage';
 export default function Register() {
     const { errors } = usePage().props;

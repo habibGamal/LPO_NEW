@@ -1,4 +1,4 @@
-import { faClose, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Inertia } from '@inertiajs/inertia'
 import { Button, message } from 'antd'

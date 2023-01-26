@@ -1,7 +1,9 @@
 import React from 'react'
 import useTranslate from '../../Hooks/useTranslate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight'
+import { faEdit} from '@fortawesome/free-solid-svg-icons/faEdit'
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash'
 import { Button, Divider, Empty, Form, Input, message, Modal, Tabs } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { Inertia } from '@inertiajs/inertia';

@@ -82,6 +82,7 @@ const TFQuestions = [
 ]
 const secondsToTimer = (spendedTime: number) => {
     const allowedTime = 20 * 60;
+    // const allowedTime = 5;
     const remainingTime = allowedTime - spendedTime;
     const minutes = Math.floor(remainingTime / 60)
     const seconds = remainingTime - minutes * 60;
@@ -105,19 +106,23 @@ export default function Exam({ wrongAns, time }: { wrongAns?: { [key: string]: s
         const interval = setInterval(() => {
             setCurrentTime(t => t + 1)
         }, 1000);
-        if (timer[0] === 0 && timer[1] === 0) {
-            Inertia.get('/');
-        }
+
         return () => {
             clearInterval(interval);
         }
     }, []);
+    useEffect(()=>{
+        if (timer[0] <= 0 && timer[1] === 0) {
+            Inertia.get('/');
+        }
+        console.log(timer);
+    },[timer]);
     return (
         <>
-            <div className="fixed rounded-r-full p-4 bg-red-400 text-white left-0 mt-4 font-bold">{timer[0]}:{timer[1]}</div>
+            <div className="fixed z-50 rounded-r-full p-4 bg-red-400 text-white -left-2 mt-4 font-bold text-3xl">{timer[0]}:{timer[1]}</div>
             <form ref={form} className="container relative rtl" onSubmit={onSubmit} >
                 <h2 className="page-title">Quiz 1</h2>
-                <div className="content grid grid-cols-auto lg:grid-cols-2 items-start gap-8">
+                <div className="content grid grid-cols-1 lg:grid-cols-2 items-start gap-8">
                     {
                         choiceQuestions.map(({ q, a }, key) => <ChoiceQ key={key} id={`q-${key}`} question={q} choices={a} correction={wrongAns?.[`q-${key}`]} />)
                     }
@@ -126,11 +131,11 @@ export default function Exam({ wrongAns, time }: { wrongAns?: { [key: string]: s
                     }
                     <div>
                         <p className="question">تكلم في نقاط عن تطور اله البيانو ؟</p>
-                        <textarea className="bg-slate-50 text-xl" placeholder="اكتب اجابتك هنا..." cols={50} name="assay-q-1" id="assay-q-1"></textarea>
+                        <textarea className="bg-slate-50 p-4 text-xl" placeholder="اكتب اجابتك هنا..."  name="assay-q-1" id="assay-q-1"></textarea>
                     </div>
                     <div>
                         <p className="question">اذكر انواع البيانو ؟</p>
-                        <textarea className="bg-slate-50 text-xl" placeholder="اكتب اجابتك هنا..." cols={50} name="assay-q-2" id="assay-q-2"></textarea>
+                        <textarea className="bg-slate-50 p-4 text-xl" placeholder="اكتب اجابتك هنا..."  name="assay-q-2" id="assay-q-2"></textarea>
                     </div>
                 </div>
 

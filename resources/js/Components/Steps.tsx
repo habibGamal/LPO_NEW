@@ -2,7 +2,8 @@ import React from "react";
 import { Button } from "antd";
 import useTranslate from "../Hooks/useTranslate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function Steps({ index, children, back }: { index: number, children: JSX.Element[], back: () => void }) {
     const t = useTranslate();

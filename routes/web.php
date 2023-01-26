@@ -100,9 +100,9 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return Inertia::render('About');
 });
-// Route::get('/images_show', function () {
-//     return Inertia::render('Images');
-// });
+Route::get('/images_show', function () {
+    return Inertia::render('Images');
+});
 Route::get('/about-program', function () {
     return Inertia::render('AboutProgram');
 });

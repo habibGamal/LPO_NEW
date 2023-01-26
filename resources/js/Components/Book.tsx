@@ -1,4 +1,4 @@
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import { PlusOutlined } from '@ant-design/icons';
