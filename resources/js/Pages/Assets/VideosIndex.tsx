@@ -2,7 +2,7 @@ import React from 'react'
 import useTranslate from '../../Hooks/useTranslate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight'
-import { faEdit} from '@fortawesome/free-solid-svg-icons/faEdit'
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit'
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash'
 import { Button, Divider, Empty, Form, Input, message, Modal, Tabs } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
@@ -11,8 +11,10 @@ import { Assets as AssetsModel, AssetsDB, AssetsName, AssetsType, VideosAssets }
 import useModal from '../../Hooks/useModal';
 import Layout from './Layout';
 import Admin from '../../Components/Admin';
+import { usePage } from '@inertiajs/inertia-react';
 const AddGroupOfVideos = ({ assets }: { assets: AssetsModel }) => {
     const [form] = Form.useForm();
+    const { errors } = usePage().props;
     const submit = (values: any) => {
         Inertia.post(AssetsModel.insertVideos(), {
             ...values,
@@ -25,6 +27,8 @@ const AddGroupOfVideos = ({ assets }: { assets: AssetsModel }) => {
             }
         });
     }
+    console.log(errors);
+
     return (
         <div className="rounded bg-slate-50 shadow-sm p-4 my-16">
             <span className='mb-4 block'>
@@ -47,6 +51,13 @@ const AddGroupOfVideos = ({ assets }: { assets: AssetsModel }) => {
                     ]}
                 >
                     <Input placeholder='Group Name' />
+                </Form.Item>
+                <Form.Item
+                    name="playlist_id"
+                    validateStatus={errors?.playlist_id && 'error'}
+                    help={errors?.playlist_id}
+                >
+                    <Input placeholder='Playlist id' />
                 </Form.Item>
                 <Divider />
                 <Form.List
@@ -105,6 +116,7 @@ const AddGroupOfVideos = ({ assets }: { assets: AssetsModel }) => {
 }
 const EditVideos = ({ group, name, close }: { group: VideosAssets, name: AssetsName, close: () => void }) => {
     const [form] = Form.useForm();
+    const { errors } = usePage().props;
     const submit = (values: any) => {
         Inertia.post(AssetsModel.editVideos(), {
             ...values,
@@ -138,6 +150,13 @@ const EditVideos = ({ group, name, close }: { group: VideosAssets, name: AssetsN
                 ]}
             >
                 <Input placeholder='Group Name' />
+            </Form.Item>
+            <Form.Item
+                name="playlist_id"
+                validateStatus={errors?.playlist_id && 'error'}
+                help={errors?.playlist_id}
+            >
+                <Input placeholder='Playlist id' />
             </Form.Item>
             <Divider />
             <Form.List

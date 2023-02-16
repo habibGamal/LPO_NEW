@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assets;
 use App\Services\ImageService;
+use App\Services\PlaylistExtractionService;
 use App\Services\VideosGroupsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -70,18 +71,37 @@ class AssetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function insertVideosGroup(Request $request, VideosGroupsService $videosService)
+    public function insertVideosGroup(Request $request, VideosGroupsService $videosService, PlaylistExtractionService $playlistService)
     {
         // -----------------------------
         $request->validate([
             'name' => 'required|string',
             'assets_type' => Rule::in(['videos']),
             'group_name' => 'required|string',
-            'videos' => 'required|array',
+            'videos' => 'array',
+            'playlist_id' => 'string',
         ]);
+        if($request->videos === null && !$request->playlist_id)
+            $request->validate([
+                'playlist_id' => 'required|string',
+            ],
+            [
+                'playlist_id' => 'Either videos or playlist id is required',
+            ]);
+
         $assets = Assets::where('name', $request->name)->first();
+
         $content = $videosService->from($assets->content);
-        $content->append($request->group_name, $request->videos);
+
+        $videosFromPlaylist = [];
+        if ($request->playlist_id) {
+            $playlistService->init($request->playlist_id);
+            $videosFromPlaylist = $playlistService->getVideosOnly();
+        }
+        $videosFromForm = $request->videos === null ? [] : $request->videos;
+        // join videos from playlist and videos from request
+        $videos = array_merge($videosFromPlaylist, $videosFromForm);
+        $content->append($request->group_name,  $videos);
         $assets->content = $content->getData();
         $assets->save();
         return back();
@@ -116,7 +136,7 @@ class AssetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function editVideosGroup(Request $request, VideosGroupsService $videosService)
+    public function editVideosGroup(Request $request, VideosGroupsService $videosService, PlaylistExtractionService $playlistService)
     {
         // -----------------------------
         $request->validate([
@@ -125,10 +145,20 @@ class AssetsController extends Controller
             'group_id' => 'required|string',
             'group_name' => 'required|string',
             'videos' => 'required|array',
+            'playlist_id' => 'string',
         ]);
         $assets = Assets::where('name', $request->name)->first();
         $content = $videosService->from($assets->content);
-        $content->edit($request->group_id, $request->group_name, $request->videos);
+
+        $videosFromPlaylist = [];
+        if ($request->playlist_id) {
+            $playlistService->init($request->playlist_id);
+            $videosFromPlaylist = $playlistService->getVideosOnly();
+        }
+        $videosFromForm = $request->videos === null ? [] : $request->videos;
+        // join videos from playlist and videos from request
+        $videos = array_merge($videosFromPlaylist, $videosFromForm);
+        $content->edit($request->group_id, $request->group_name, $videos);
         $assets->content = $content->getData();
         $assets->save();
         return back();
@@ -156,7 +186,7 @@ class AssetsController extends Controller
     }
 
 
-    public function removeImage(Request $request,ImageService $imageService)
+    public function removeImage(Request $request, ImageService $imageService)
     {
         // -----------------------------
         $request->validate([

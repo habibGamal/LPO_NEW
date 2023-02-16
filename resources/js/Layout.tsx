@@ -49,11 +49,11 @@ const Nav = () => {
                         <NavLink onClick={hideNav} href="/assets" name={t('صور وفيديوهات', 'Images & Videos')} />
                         <Auth>
                             <NavLink onClick={hideNav} href="/books" name={t('المواد', 'Material')} />
-                            <NavLink onClick={hideNav} href="/articles" name={t('معلومات عن البيانو', 'Piano Info')} />
+                            {/* <NavLink onClick={hideNav} href="/articles" name={t('معلومات عن البيانو', 'Piano Info')} /> */}
                             <NavLink onClick={hideNav} href="/meetings" name={t('الجلسات', 'Meetings')} />
                             <NavLink onClick={hideNav} href="/quiz" name={t('الامتحانات', 'Quiz')} />
                         </Auth>
-                        <NavLink onClick={hideNav} href="/images_show" name={t('الصور', 'Images')} />
+                        {/* <NavLink onClick={hideNav} href="/images_show" name={t('الصور', 'Images')} /> */}
                         <NavLink onClick={hideNav} href="/about-program" name={t('عن البرنامج', 'About Program')} />
                         <NavLink onClick={hideNav} href="/contact" name={t('تواصل معنا', 'Contact')} />
                         <NavLink onClick={hideNav} href="/feedback" name={t('انطباعك', 'Feedback')} />

@@ -79,7 +79,7 @@ class ExamController extends Controller
         $student = $request->user()->student;
         $student->can_exam = false;
         $student->is_in_exam = false;
-        $student->score = 15 - count($wrongAns);
+        $student->score = 20 - count($wrongAns);
         $student->save();
         return Inertia::render('QuizSamples/Exam', [
             'time' => $student->start_time,

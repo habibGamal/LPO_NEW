@@ -1,10 +1,11 @@
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons/faCirclePlay'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Book, BookDB } from "../../Models/Book";
 import { motion } from "framer-motion"
 import React from "react";
 import useTranslate from "../../Hooks/useTranslate";
+import { Inertia } from '@inertiajs/inertia';
 enum Screen {
     Books,
     Videos,
@@ -51,6 +52,7 @@ export default function Index({ booksDB }: { booksDB: BookDB[] }) {
                         {
                             books.map(book => <div key={book.id} onClick={() => toVideos(book)} style={{ backgroundImage: `url("${book.cover}")` }} className="book books-1"></div>)
                         }
+                        <div key="piano_info" style={{backgroundImage:`url("images/piano_info.jpg")`}} onClick={()=>Inertia.get('articles')} className="book books-1"></div>
                     </div>
                 </section>
                 <section className={`container my-8 moving-section screen-2 ${screen === Screen.Videos ? 'current' : ''}`}>
@@ -70,7 +72,7 @@ const VideosScreen = ({ book }: { book: Book }) => {
                 <div className="book-video-iframe col-span-3" dangerouslySetInnerHTML={{ __html: currentVideo }} />
                 <div className="rounded overflow-hidden shadow-dark-50 col-span-1">
                     <h4 className="p-6 text-2x font-normal bg-gray-200">List of Videos</h4>
-                    <ul className="bg-gray-50 ">
+                    <ul className="bg-gray-50 max-h-[500px] overflow-y-auto">
                         {
                             book.videos.map((video, i) => <Video key={i} name={video.name} onClick={() => setCurrentVideo(video.link)} active={currentVideo === video.link} />)
                         }

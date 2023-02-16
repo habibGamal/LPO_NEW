@@ -8,7 +8,6 @@ import BookVideo from './BookVideo';
 import { Button, Form, Input, Upload, UploadFile, UploadProps } from 'antd';
 import { Inertia } from '@inertiajs/inertia';
 import { Link, usePage } from '@inertiajs/inertia-react';
-
 export default function Book({ book = null }: { book?: BookModel | null }) {
     const [form] = Form.useForm();
     const { errors } = usePage().props;
@@ -76,6 +75,10 @@ export default function Book({ book = null }: { book?: BookModel | null }) {
     };
 
     const getErrors = () => book ? errors?.[`${book.id}`] : errors?.['-1'];
+    // ytlist('https://www.youtube.com/playlist?list=PLC_106yoOKl0Y9w5p6A1UoGUzNivVI8no', 'url').then((res:any) => {
+    //     console.log(res);
+    // });
+    // console.log(ytlist);
 
     return (
         <>
@@ -85,7 +88,7 @@ export default function Book({ book = null }: { book?: BookModel | null }) {
                     form={form}
                     name="basic"
                     className="max-w-[500px] mx-auto"
-                    labelCol={{ span: 6 }}
+                    labelCol={{ span: 8 }}
                     wrapperCol={{ span: 16 }}
                     initialValues={{ remember: true }}
                     onFinish={book ? update : store}
@@ -124,6 +127,14 @@ export default function Book({ book = null }: { book?: BookModel | null }) {
                         initialValue={book?.pdf}
                         validateStatus={getErrors()?.pdf && 'error'}
                         help={getErrors()?.pdf}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="playlist_id"
+                        label="Youtube playlist id"
+                        validateStatus={getErrors()?.playlist_id && 'error'}
+                        help={getErrors()?.playlist_id}
                     >
                         <Input />
                     </Form.Item>
