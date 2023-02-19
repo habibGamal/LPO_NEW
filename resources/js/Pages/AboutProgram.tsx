@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { ContextApi } from "../Contexts/AppContext";
 import useTranslate from "../Hooks/useTranslate";
+import IDCard from "../Components/IDCard";
 export default function AboutProgram() {
     const t = useTranslate();
     const [{ lang }] = useContext(ContextApi)!;
@@ -25,6 +26,18 @@ export default function AboutProgram() {
 
             <div className="grid grid-cols-1 md:grid-cols-1 gap-8 ">
                 <div className="block">
+                    <ul className="m-6 flex flex-col gap-4">
+                        <IDCard
+                            name={t(
+                                "م.م/ مها أحمد قاسم",
+                                "Lect. Maha Ahmed Qassem"
+                            )}
+                            title={t(
+                                'مدرس مساعد - قسم التربية الموسيقية - كلية التربية النوعية - جامعة أسيوط - شاركت في تدريب وقيادة الفريق الموسيقي بالكلية - حاصلة على شهادة تدريبية معتمدة من جامعة Babson الأمريكية للمشاركة في مشروع تعزيز ريادة الأعمال  والمشروعات الممول من الوكالة الأمريكية للتنمية الدولية ( Seed ) - شاركت كعضو في لجنة تحكيم البرنامج القومي للحاضنات التكنولوجية المتخصصة "إنطلاق" بحاضنة الشركات همة - شاركت كعضو في لجنة تحكيم برنامج InoEgypt بحاضنة الشركات همة بجامعة أسيوط .',
+                                'Assistant Lecturer - Department of Musical Education - Faculty of Specific Education - Assiut University - Participated in training and leading the college\'s musical team - She holds a certified training certificate from the American Babson University to participate in the project to promote entrepreneurship and projects funded by the US Agency for International Development (Seed) - She participated as a member In the arbitration committee of the national program for specialized technology incubators "Intilaq" at the Hemma incubator - I participated as a member of the judging committee of the InoEgypt program at the Hemma corporate incubator at Assiut University.'
+                            )}
+                        />
+                    </ul>
                     <h2
                         className={`font-sans text-3xl bg-gray-100 p-2 px-3 w-fit ${
                             lang === "ar" ? "border-r-4" : "border-l-4"
@@ -42,7 +55,6 @@ export default function AboutProgram() {
                                 "أستاذ الآداء ( بيانو) بقسم التربية الموسيقية  ومدير مركز الفنون الأسبق بكلية التربية النوعية - جامعة عين شمس شارك في الاشراف على العديد من رسائل الماجستير والدكتوراه – له العديد من المؤلفات الموسيقية للآلة البيانو - شارك كمايستو وبيانيست في العديد من الحفلات الموسيقية بدار الأوبرا المصرية  – عضو لجنة المحكمين لفحص الإنتاج العلمي لشغل وظائف الأساتذة والاساتذة المساعيدين -  قطاع التربية الموسيقية  ",
                                 "Professor of performance (piano) in the Department of Music Education And former director of the Art Center at the Faculty of Specific Education - Ain Shams University Participated in the supervision of several master's and doctoral dissertations - He has many musical compositions for the piano - As a maesto and pianist participated in many concerts at the Egyptian Opera House - Member of the arbitrators committee to examine scientific production for the positions of professors and assistant professors - Music Education Sector"
                             )}
-                            imgSrc="images/dr_ali.jpg"
                         />
                         <IDCard
                             name={t(
@@ -53,7 +65,6 @@ export default function AboutProgram() {
                                 "أستاذ النظريات والتأليف بقسم التربية الموسيقية  وكيل كلية التربية النوعية لشئون التعليم والطلاب  - جامعة أسيوط  شاركت في الاشراف على العديد من رسائل الماجستير والدكتوراه – لها العديد من المؤلفات في مجال النظريات والتأليف عضو اللجنة العليا للانشطة الطلابية - عضو لجنة المحكمين لفخص الإنتاج العلمي لشغل وظائف الأساتذة والاساتذة المساعيدين -  قطاع التربية الموسيقية  ",
                                 "Professor of Theories and Composition, Department of Musical Education Vice Dean of the Faculty of Specific Education for Education and Student Affairs - Assiut University Participated in supervising many master's and doctoral dissertations - has many publications in the field of theories and authorship Member of the Higher Committee for Student Activities - Member of the Arbitrators Committee for the examination of scientific production for the positions of professors and assistant professors - Music Education Sector"
                             )}
-                            imgSrc="images/dr_abrar.jpg"
                         />
                         <IDCard
                             name={t(
@@ -64,7 +75,6 @@ export default function AboutProgram() {
                                 "المدرس بقسم تكنولوجيا التعليم  كلية التربية النوعية -  جامعة أسيوط     نائب مدير وحدة ضمان الجودة بكلية التربية النوعية - المشرف على وحدة التقويم والقياس بكلية التربية النوعية -  عضو لجنة إعداد المقررات الإلكترونية لمرحلة البكالوريوس – الاشراف على العديد من رسائل الماجستير والدكتوراه – له العديد من المؤلفات في مجال تكنولوجيا التعليم والحاسب الالي",
                                 "Lecturer in the Department of Educational Technology Faculty of Specific Education - Assiut University Deputy Director of the Quality Assurance Unit at the Faculty of Specific Education - Supervisor of the Evaluation and Measurement Unit at the Faculty of Specific Education - Member of the Committee for Preparing Electronic Courses for the Bachelor's Degree - Supervising many master's and doctoral dissertations - Has many publications in the field of educational technology and computers"
                             )}
-                            imgSrc="images/dr_saad.jpg"
                         />
                     </ul>
                 </div>
@@ -75,26 +85,9 @@ export default function AboutProgram() {
                             lang === "ar" ? "border-r-4" : "border-l-4"
                         } border-main`}
                     >
-                        {t(
-                            "ويسعدني أن أشكر كلاً من",
-                            "I am happy to thank both"
-                        )}
+                        {t("الفريق القائم على عمل البرنامج", "Team Work")}
                     </h2>
                     <ul className="m-6 flex flex-col gap-4">
-                        <IDCard
-                            name={t(
-                                "أ.م.د/ رويدا صابر أحمد ",
-                                "Prof. Dr. Rowaida Saber Ahmed"
-                            )}
-                            title={t(
-                                "أستاذ النظريات والتأليف المساعد بقسم التربية الموسيقية – كلية التربية النوعية-  جامعة أسيوط ",
-                                "Assistant Professor of Theory and Composition, Department of Music Education, Faculty of Specific Education, Assiut University"
-                            )}
-                            highlight={t(
-                                "على ماقدمته لي من دعم ومساعدة خلال تنفيذ البرنامج",
-                                "For the support and assistance you provided me during the implementation of the program"
-                            )}
-                        />
                         <IDCard
                             name={t(
                                 "م/ فكتور اميل سعيد",
@@ -125,32 +118,3 @@ export default function AboutProgram() {
         </div>
     );
 }
-
-const IDCard = ({
-    name,
-    title,
-    highlight = "",
-    imgSrc,
-}: {
-    name: string;
-    title: string;
-    highlight?: string;
-    imgSrc?: string;
-}) => (
-    <li className="text-xl shadow-gray-400 font-sans bg-gray-50 p-4 rounded w-fit">
-        <div className="flex flex-col lg:flex-row">
-            {imgSrc && (
-                <img
-                    className="w-36 aspect-square object-cover mb-4 lg:mb-0 mx-auto lg:mx-4 rounded"
-                    src={imgSrc}
-                />
-            )}
-            <div>
-                <h4 className="text-2xl font-bold font-sans mb-2">{name}</h4>
-                {title}
-                <br />
-                <span className="font-bold font-sans">{highlight}</span>
-            </div>
-        </div>
-    </li>
-);
