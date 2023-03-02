@@ -28,7 +28,7 @@ export default function Single({ meetingDB }: { meetingDB: MeetingDB }) {
                 //     return <div key={i} className="meeting-iframe" dangerouslySetInnerHTML={{ __html: video }} />;
                 // }
                 // )
-                <VideosScreen videos={meeting?.videos.map((video, index) => ({ link: video, name: "Video " + index }))} />
+                <VideosScreen videos={meeting?.videos.map((video, index) => ({ link: video, name: "Video " + (index + 1) }))} />
             }
             {
                 meeting?.assets.map((asset, i) => displayAsset(asset, i))
