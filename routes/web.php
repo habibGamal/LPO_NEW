@@ -51,11 +51,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/assets/insert-images', [AssetsController::class, 'insertImages']);
     Route::post('/assets/edit-images', [AssetsController::class, 'editImages']);
     Route::post('/assets/remove-image', [AssetsController::class, 'removeImage']);
-    Route::get('/display-scores', function () {
-        return Inertia::render('DisplayScores', [
-            'scores' => Exam::orderByDesc('id')->get(),
-        ]);
-    });
+    // Route::get('/display-scores', function () {
+    //     return Inertia::render('DisplayScores', [
+    //         'scores' => Exam::orderByDesc('id')->get(),
+    //     ]);
+    // });
 });
 // user area
 Route::middleware(['auth','activated'])->group(function () {

@@ -13,9 +13,9 @@ export default function Dashboard() {
                 <Link href="/meetings/create">
                     <DashboardCard imgSrc="./images/meeting.jpg" title="Manage Meetings" />
                 </Link>
-                <Link href="/display-scores">
+                {/* <Link href="/display-scores">
                     <DashboardCard imgSrc="./images/quiz.png" title="Exam Scores" />
-                </Link>
+                </Link> */}
                 <Link href="/articles/create">
                     <DashboardCard imgSrc="./images/articles.png" title="Manage Articles" />
                 </Link>

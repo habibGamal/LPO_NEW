@@ -14,6 +14,7 @@ class Meeting extends Model
         'date',
         'state',
         'assets',
+        'videos'
     ];
 
     public $timestamps = false;

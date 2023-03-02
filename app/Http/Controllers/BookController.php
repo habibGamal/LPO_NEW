@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Services\PlaylistExtractionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -37,7 +38,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, PlaylistExtractionService $playlistService)
     {
         $request->validate([
             'name' => ['required', 'string'],
@@ -45,7 +46,7 @@ class BookController extends Controller
             'pdf' => ['required', 'string'],
             'video_name.*' => ['string'],
             'video_link.*' => ['string'],
-            'playlist_id' => ['string']
+            'playlist_id' => ['string'],
         ]);
         $videos_names = $request->input('video_name.*');
         $videos_links = $request->input('video_link.*');
@@ -54,31 +55,19 @@ class BookController extends Controller
             foreach ($videos_names as $key => $name) {
                 $videos[] = [$name, $videos_links[$key]];
             }
-        $path = saveImageAndGetPath($request->file('cover'));
+        $videosFromPlaylist = [];
+        if ($request->playlist_id) {
 
-        if ($request->input('playlist_id') != null) {
-            $client = new Google_Client();
-            $client->setDeveloperKey('AIzaSyDlj8AhjpJh10ruX56NL9AhBORmdG12fis');
-            $youtube = new Google_Service_YouTube($client);
-            $playlistId = $request->input('playlist_id');
-            $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('snippet', array(
-                'playlistId' => $playlistId,
-                'maxResults' => 50
-            ));
-            // $videoLinks = [];
-            foreach ($playlistItemsResponse['items'] as $playlistItem) {
-                $id = $playlistItem['snippet']['resourceId']['videoId'];
-                $video =  '<iframe width="560" height="315" src="https://www.youtube.com/embed/'. $id .'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
-                $videos[] =  [$playlistItem['snippet']['title'], $video];
-            }
+            $playlistService->init($request->playlist_id);
+            $videosFromPlaylist = $playlistService->getVideosAndNames();
         }
-        // dump($videos);
-        // exit;
+
+        $path = saveImageAndGetPath($request->file('cover'));
         Book::create([
             'name' => $request->input('name'),
             'cover' => $path,
             'pdf' => $request->input('pdf'),
-            'videos' => json_encode($videos),
+            'videos' => json_encode(array_merge($videos, $videosFromPlaylist)),
         ]);
         return Redirect::route('books.create');
     }
@@ -112,7 +101,7 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Book $book, PlaylistExtractionService $playlistService)
     {
         $request->validate([
             'name' => ['required', 'string'],
@@ -120,6 +109,7 @@ class BookController extends Controller
             'pdf' => ['required', 'string'],
             'video_name.*' => ['string'],
             'video_link.*' => ['string'],
+            'playlist_id' => ['string']
         ]);
 
         $videos_names = $request->input('video_name.*');
@@ -130,12 +120,17 @@ class BookController extends Controller
                 $videos[] = [$name, $videos_links[$key]];
             }
 
+        $videosFromPlaylist = [];
+        if ($request->playlist_id) {
+            $playlistService->init($request->playlist_id);
+            $videosFromPlaylist = $playlistService->getVideosAndNames();
+        }
         if ($request->hasFile('cover'))
             $book->cover = saveImageAndGetPath($request->file('cover'));
 
         $book->name = $request->input('name');
         $book->pdf = $request->input('pdf');
-        $book->videos = json_encode($videos);
+        $book->videos = json_encode(array_merge($videos,$videosFromPlaylist));
 
         $book->save();
 

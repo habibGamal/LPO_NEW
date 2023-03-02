@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Meeting;
 use App\Services\ImageService;
+use App\Services\PlaylistExtractionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,7 @@ class MeetingController extends Controller
         if ($category === 'history')
             return Inertia::render('Meetings/History', ['meetingsDB' => Meeting::select(['id', 'name', 'date', 'state'])->where('state', '!=', 'offline')->get()]);
         if ($category === 'offline')
-            return Inertia::render('Meetings/Index', ['meetingsDB' => Meeting::where('state','offline')->get()]);
+            return Inertia::render('Meetings/Index', ['meetingsDB' => Meeting::where('state', 'offline')->get()]);
         return back();
     }
 
@@ -46,7 +47,7 @@ class MeetingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, ImageService $imageService)
+    public function store(Request $request, ImageService $imageService, PlaylistExtractionService $playlistService)
     {
         $request->validate([
             'name' => ['required', 'string'],
@@ -54,7 +55,8 @@ class MeetingController extends Controller
             'date' => ['required', 'date'],
             'state' => ['required', Rule::in(['not_started', 'in_meeting', 'ended', 'offline']),],
             'videos' => ['array', 'nullable'],
-            'videos.*' => ['string']
+            'videos.*' => ['string'],
+            'playlist_id' => ['string'],
         ]);
 
         $assets = $imageService->pathsStructure();
@@ -62,9 +64,11 @@ class MeetingController extends Controller
             $assets->create($request->assets);
 
         // videos
-        $videos = $request->input('videos');
-        if ($videos == null) {
-            $videos = [];
+        $videos = $request->videos ?? [];
+        if ($request->playlist_id) {
+            $playlistService->init($request->playlist_id);
+            $videosFromPlaylist = $playlistService->getVideosOnly();
+            $videos = array_merge($videos, $videosFromPlaylist);
         }
         Meeting::create([
             'name' => $request->input('name'),
@@ -107,7 +111,7 @@ class MeetingController extends Controller
      * @param  \App\Models\Meeting  $meeting
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Meeting $meeting, ImageService $imageService)
+    public function update(Request $request, Meeting $meeting, ImageService $imageService, PlaylistExtractionService $playlistService)
     {
         $request->validate([
             'name' => ['required', 'string'],
@@ -125,9 +129,11 @@ class MeetingController extends Controller
         if ($request->hasFile('assets'))
             $assets->append($request->assets);
         // videos
-        $videos = $request->input('videos');
-        if ($videos == null) {
-            $videos = [];
+        $videos = $request->videos ?? [];
+        if ($request->playlist_id) {
+            $playlistService->init($request->playlist_id);
+            $videosFromPlaylist = $playlistService->getVideosAndNames();
+            $videos = array_merge($videos, $videosFromPlaylist);
         }
         $meeting->name = $request->input('name');
         $meeting->link = $request->input('meeting_link');

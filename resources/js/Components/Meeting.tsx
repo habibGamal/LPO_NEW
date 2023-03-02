@@ -146,6 +146,14 @@ export default function Meeting({ meeting = null }: { meeting?: MeetingModel | n
                             </Upload>
                         </>
                     </Form.Item>
+                    <Form.Item
+                        name="playlist_id"
+                        label="Youtube playlist id"
+                        validateStatus={getErrors()?.playlist_id && 'error'}
+                        help={getErrors()?.playlist_id}
+                    >
+                        <Input />
+                    </Form.Item>
                     <Form.List
                         name="videos"
                         initialValue={meeting?.videos}
@@ -191,6 +199,7 @@ export default function Meeting({ meeting = null }: { meeting?: MeetingModel | n
                             </>
                         )}
                     </Form.List>
+
                     <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
                         <Button type="primary" htmlType="submit">
                             Save
