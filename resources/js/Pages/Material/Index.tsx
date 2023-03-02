@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import React from "react";
 import useTranslate from "../../Hooks/useTranslate";
 import { Inertia } from '@inertiajs/inertia';
+import VideosScreen from '../../Components/VideosScreen';
 enum Screen {
     Books,
     Videos,
@@ -18,8 +19,8 @@ export default function Index({ booksDB }: { booksDB: BookDB[] }) {
         if (book.videos.length > 0) {
             setCurrentBook(book)
             setScreen(Screen.Videos);
-        }else{
-            window.open(book.pdf,'_blank');
+        } else {
+            window.open(book.pdf, '_blank');
         }
     }
     const toBooks = () => {
@@ -52,11 +53,12 @@ export default function Index({ booksDB }: { booksDB: BookDB[] }) {
                         {
                             books.map(book => <div key={book.id} onClick={() => toVideos(book)} style={{ backgroundImage: `url("${book.cover}")` }} className="book books-1"></div>)
                         }
-                        <div key="piano_info" style={{backgroundImage:`url("images/piano_info.jpg")`}} onClick={()=>Inertia.get('articles')} className="book books-1"></div>
+                        <div key="piano_info" style={{ backgroundImage: `url("images/piano_info.jpg")` }} onClick={() => Inertia.get('articles')} className="book books-1"></div>
                     </div>
                 </section>
                 <section className={`container my-8 moving-section screen-2 ${screen === Screen.Videos ? 'current' : ''}`}>
-                    {currentBook ? <VideosScreen book={currentBook!} /> : ''}
+                    {currentBook ? <VideosScreen videos={currentBook.videos} /> : ''}
+                    <a className="btn block my-4 mx-auto w-fit hover:text-white" href={currentBook?.pdf} target="_blank">Download PDF</a>
                     <button onClick={toBooks} className="btn block my-4 mx-auto">Back to books</button>
                 </section>
             </div>
@@ -64,27 +66,4 @@ export default function Index({ booksDB }: { booksDB: BookDB[] }) {
         </>
     )
 }
-const VideosScreen = ({ book }: { book: Book }) => {
-    const [currentVideo, setCurrentVideo] = useState(book.videos[0].link);
-    return (
-        <>
-            <div className="grid lg:grid-cols-4 gap-4">
-                <div className="book-video-iframe col-span-3" dangerouslySetInnerHTML={{ __html: currentVideo }} />
-                <div className="rounded overflow-hidden shadow-dark-50 col-span-1">
-                    <h4 className="p-6 text-2x font-normal bg-gray-200">List of Videos</h4>
-                    <ul className="bg-gray-50 max-h-[500px] overflow-y-auto">
-                        {
-                            book.videos.map((video, i) => <Video key={i} name={video.name} onClick={() => setCurrentVideo(video.link)} active={currentVideo === video.link} />)
-                        }
-                    </ul>
-                </div>
-            </div>
-            <a className="btn block my-4 mx-auto w-fit hover:text-white" href={book.pdf} target="_blank">Download PDF</a>
-        </>
-    )
-}
-const Video = ({ name, active, onClick }: { name: string, active: boolean, onClick: React.MouseEventHandler<HTMLLIElement> }) => {
-    return (
-        <li onClick={onClick} className={`${active ? 'bg-gray-100' : ''} py-4 px-4 cursor-pointer hover:bg-gray-100`}><FontAwesomeIcon icon={faCirclePlay} className={`${active ? 'text-main' : 'text-second'} mx-4`} /> {name}</li>
-    )
-}
+
