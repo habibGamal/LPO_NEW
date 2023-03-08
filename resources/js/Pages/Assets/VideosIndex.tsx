@@ -1,11 +1,9 @@
 import React from 'react'
 import useTranslate from '../../Hooks/useTranslate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight'
-import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit'
-import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash'
+import { faEdit ,faTrash,faCaretRight} from '@fortawesome/free-solid-svg-icons'
 import { Button, Divider, Empty, Form, Input, message, Modal, Tabs } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { MinusCircleOutlined, PlusOutlined, } from '@ant-design/icons'
 import { Inertia } from '@inertiajs/inertia';
 import { Assets as AssetsModel, AssetsDB, AssetsName, AssetsType, VideosAssets } from '../../Models/Assets';
 import useModal from '../../Hooks/useModal';
@@ -238,7 +236,7 @@ export default function VideosIndex({ assetsDB }: { assetsDB: AssetsDB }) {
                                         <div className='flex gap-4'>
                                             <p>{group.name}</p>
                                             <Admin>
-                                                <Button onClick={() => setModalData({ group, name: assets.name })} size='small' type='dashed' icon={<FontAwesomeIcon className='text-gray-600' icon={faEdit} />} />
+                                                <Button onClick={() => setModalData({ group, name: assets.name })} size='small' type='dashed' icon={<FontAwesomeIcon icon={faEdit} />} />
                                                 <Button onClick={() => deleteVideoGroup(group)} size='small' danger icon={<FontAwesomeIcon icon={faTrash} />} />
                                             </Admin>
                                         </div>,
