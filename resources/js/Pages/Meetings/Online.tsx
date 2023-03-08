@@ -22,7 +22,8 @@ export default function Online() {
                     imgSrc='/images/previous.png'
                     title={t('السابق', 'Previous')}
                     onClick={() => {
-                        Inertia.get('/meetings/categories/preivous')
+                        // /meetings/online-or-offline
+                        Inertia.get('/meetings/online-or-offline')
                     }}
                     key={2}
                 />

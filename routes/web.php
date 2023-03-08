@@ -66,11 +66,11 @@ Route::middleware(['auth','activated'])->group(function () {
     Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
-    Route::get('/meetings', function () {
-        return Inertia::render('Meetings/OnlineAndOffline');
-    });
     Route::get('/meetings/online', function () {
         return Inertia::render('Meetings/Online');
+    });
+    Route::get('/meetings/online-or-offline', function () {
+        return Inertia::render('Meetings/OnlineAndOffline');
     });
     Route::get('/meetings/categories/{category}', [MeetingController::class, 'index'])->name('meetings.index');
     Route::get('/meetings/{meeting}', [MeetingController::class, 'show'])->name('meetings.show');

@@ -14,7 +14,7 @@ export default function OnlineAndOffline() {
                     imgSrc='/images/online.png'
                     title={t('اونلاين', 'Online')}
                     onClick={() => {
-                        Inertia.get('/meetings/online')
+                        Inertia.get('/meetings/categories/preivous')
                     }}
                     key={1}
                 />

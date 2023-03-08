@@ -50,7 +50,7 @@ const Nav = () => {
                         <Auth>
                             <NavLink onClick={hideNav} href="/books" name={t('المواد', 'Material')} />
                             {/* <NavLink onClick={hideNav} href="/articles" name={t('معلومات عن البيانو', 'Piano Info')} /> */}
-                            <NavLink onClick={hideNav} href="/meetings" name={t('الجلسات', 'Meetings')} />
+                            <NavLink onClick={hideNav} href="/meetings/online" name={t('الجلسات', 'Meetings')} />
                             <NavLink onClick={hideNav} href="/quiz" name={t('الامتحانات', 'Quiz')} />
                         </Auth>
                         {/* <NavLink onClick={hideNav} href="/images_show" name={t('الصور', 'Images')} /> */}
