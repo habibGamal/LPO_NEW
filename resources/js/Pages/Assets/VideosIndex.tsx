@@ -12,6 +12,7 @@ import useModal from '../../Hooks/useModal';
 import Layout from './Layout';
 import Admin from '../../Components/Admin';
 import { usePage } from '@inertiajs/inertia-react';
+import VideosScreen from '../../Components/VideosScreen';
 const AddGroupOfVideos = ({ assets }: { assets: AssetsModel }) => {
     const [form] = Form.useForm();
     const { errors } = usePage().props;
@@ -229,7 +230,7 @@ export default function VideosIndex({ assetsDB }: { assetsDB: AssetsDB }) {
                         <Empty description="No data yet" /> :
                         <Tabs
                             defaultActiveKey="1"
-                            tabPosition={'left'}
+                            tabPosition={'top'}
                             className="bg-slate-50 rounded p-4"
                             items={assets.videos.map((group, i) => {
                                 return {
@@ -245,14 +246,15 @@ export default function VideosIndex({ assetsDB }: { assetsDB: AssetsDB }) {
                                     disabled: i === 28,
                                     children:
                                         <>
-                                            {
+                                            {/* {
                                                 group.videos.map(
                                                     (video, i) =>
                                                         <div key={i} className="rounded shadow p-4 bg-gray-100 my-4">
                                                             <div key={i} className="meeting-iframe" dangerouslySetInnerHTML={{ __html: video }} />
                                                         </div>
                                                 )
-                                            }
+                                            } */}
+                                            <VideosScreen videos={group.videos.map((link,index)=>({link,name:'video '+(index +1)}))} />
                                         </>,
                                 };
                             })}

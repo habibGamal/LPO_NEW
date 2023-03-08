@@ -3,14 +3,16 @@ import React from 'react'
 import Choice from '../../Components/ChoiceCard';
 import { Assets, AssetsName } from '../../Models/Assets';
 import Layout from './Layout';
+import useTranslate from '../../Hooks/useTranslate';
 
 export default function Videos(){
+    const t = useTranslate();
     return (
         <Layout>
             <div key={1} className="grid lg:grid-cols-2 gap-8 items-end justify-items-evenly">
                 <Choice
                     imgSrc='/images/students.png'
-                    title='Students'
+                    title={t('الطلاب', 'Students')}
                     onClick={() => {
                         Inertia.get(Assets.getAssets(AssetsName.studentVideos))
                     }}
@@ -18,7 +20,7 @@ export default function Videos(){
                 />
                 <Choice
                     imgSrc='/images/instructor.png'
-                    title='Instructor'
+                    title={t('المدرس', 'Instructor')}
                     onClick={() => {
                         Inertia.get(Assets.getAssets(AssetsName.authorVideos))
                     }}

@@ -12,7 +12,7 @@ export default function Images() {
             <div key={1} className="grid lg:grid-cols-2 gap-8 items-end justify-items-evenly">
                 <Choice
                     imgSrc='/images/students.png'
-                    title={t('الجلسات', 'Sessions')}
+                    title={t('الطلاب', 'Students')}
                     onClick={() => {
                         Inertia.get(Assets.getAssets(AssetsName.studentImages))
                     }}
@@ -20,7 +20,7 @@ export default function Images() {
                 />
                 <Choice
                     imgSrc='/images/instructor.png'
-                    title='Instructor'
+                    title={t('المدرس', 'Instructor')}
                     onClick={() => {
                         Inertia.get(Assets.getAssets(AssetsName.authorImages))
                     }}
