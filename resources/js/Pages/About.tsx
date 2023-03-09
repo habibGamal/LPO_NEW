@@ -9,7 +9,6 @@ export default function About() {
     const [{ lang }] = useContext(ContextApi)!;
     return (
         <div className="container lg:text-align-inherit">
-
             <div className="flex justify-center my-8">
                 <div className="rounded-full w-48 aspect-square overflow-hidden border-2 border-solid border-white outline-3 outline-gray-200 outline">
                     <img
@@ -228,7 +227,7 @@ export default function About() {
                         "تطبيق المرونة العضلية في باقي بنود مقرر البيانو",
                         "applying muscle flexibility in the rest of the piano course items"
                     )}
-                    delay={0.4}
+                    delay={0.25}
                 />
                 <TableItem
                     title={t(
@@ -247,7 +246,80 @@ export default function About() {
                         "السيطرة علي الاداء العضلي والنغمي",
                         "control of muscle and tonal performance"
                     )}
-                    delay={0.6}
+                    delay={0.3}
+                />
+                <TableItem
+                    title={t("سلالم دو/,صول/ك", "stairs du/,sol/k")}
+                    s1={t(
+                        "اداء السلالم الكبيرة واقاربها الصغار",
+                        "Perform large ladders and their smaller relatives"
+                    )}
+                    s2={t(
+                        "انتقال اثر تعلم شروط الاداء الخاصة بالسلالم المقررة على باقي السلالم الاخرى",
+                        "The transfer of the effect of learning the performance conditions of the prescribed scales on the rest of the other scales"
+                    )}
+                    s3={t(
+                        "تحليل عزفي للسلالم الكبيرة واقاربها",
+                        "Instrumental analysis of the major scales and their relatives"
+                    )}
+                    delay={0.35}
+                />
+                <TableItem
+                    title={t(
+                        "تمارين من كتاب Beyer op.101",
+                        "Exercises from the book Beyer op.101"
+                    )}
+                    s1={t(
+                        "اداء تمارين ذات الحان بسيطة",
+                        "Perform simple melodic exercises"
+                    )}
+                    s2={t(
+                        "تحليل التمارين والثقة بالنفس اثناء الاداء",
+                        "Analysis of exercises and self-confidence during performance"
+                    )}
+                    s3={t(
+                        "تطبيق المفاهيم التعبيرية اثناء اداء التمارين ذات الالحان البسيطة",
+                        "Apply expressive concepts while performing exercises with simple melodies"
+                    )}
+                    delay={0.4}
+                />
+                <TableItem
+                    title={t(
+                        "مقطوعة شرقية بسيطة تناسب مستوى المتعلم",
+                        "A simple oriental piece that suits the learner's level"
+                    )}
+                    s1={t(
+                        "اداء مقطوعة ذات طابع شرقي",
+                        "An oriental performance"
+                    )}
+                    s2={t(
+                        "تنمبة التذوق والاحساس بالذات اثناء العزف و القدرة على تحليل المقطوعات الشرقية",
+                        "Develop taste and sense of self while playing and the ability to analyze oriental compositions"
+                    )}
+                    s3={t(
+                        "الادراك الحسي و السعي للمؤلفات الشرقية البسيطة والقدرة على تميزها",
+                        "Sensory perception and pursuit of simple oriental compositions and the ability to distinguish them"
+                    )}
+                    delay={0.45}
+                />
+                <TableItem
+                    title={t(
+                        "مقطوعة غربية بسيطة من اي عصر",
+                        "a simple western piece from any era"
+                    )}
+                    s1={t(
+                        "اداء مقطوعة ذات طابع غربي",
+                        "Western performance"
+                    )}
+                    s2={t(
+                        "تنمبة التذوق والاحساس بالذات اثناء العزف و القدرة على تحليل المقطوعات الغربية",
+                        "Develop taste and sense of self while playing, and the ability to analyze Western compositions"
+                    )}
+                    s3={t(
+                        "الادراك الحسي و السعي للمؤلفات الغربية البسيطة والقدرة على تميزها",
+                        "Perception and pursuit of simple Western compositions and the ability to distinguish them"
+                    )}
+                    delay={0.5}
                 />
             </div>
         </div>

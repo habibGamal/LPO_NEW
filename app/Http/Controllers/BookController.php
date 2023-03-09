@@ -46,7 +46,7 @@ class BookController extends Controller
             'pdf' => ['required', 'string'],
             'video_name.*' => ['string'],
             'video_link.*' => ['string'],
-            'playlist_id' => ['string'],
+            'playlist_id' => ['nullable','string'],
         ]);
         $videos_names = $request->input('video_name.*');
         $videos_links = $request->input('video_link.*');
@@ -109,7 +109,7 @@ class BookController extends Controller
             'pdf' => ['required', 'string'],
             'video_name.*' => ['string'],
             'video_link.*' => ['string'],
-            'playlist_id' => ['string']
+            'playlist_id' => ['nullable','string']
         ]);
 
         $videos_names = $request->input('video_name.*');
