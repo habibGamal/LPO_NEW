@@ -52,6 +52,8 @@ class AssetsController extends Controller
      */
     public function insertImages(Request $request, ImageService $imageService)
     {
+        // dump($request->all());
+        // exit;
         // -----------------------------
         $request->validate([
             'name' => 'required|string',
