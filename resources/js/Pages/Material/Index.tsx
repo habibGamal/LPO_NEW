@@ -50,10 +50,10 @@ export default function Index({ booksDB }: { booksDB: BookDB[] }) {
             <div className="move-sections-container ltr">
                 <section className={`container moving-section screen-1 ${screen === Screen.Books ? 'current' : ''}`}>
                     <div className="box-out">
+                        <div key="piano_info" style={{ backgroundImage: `url("images/piano_info.jpg")` }} onClick={() => Inertia.get('articles')} className="book books-1"></div>
                         {
                             books.map(book => <div key={book.id} onClick={() => toVideos(book)} style={{ backgroundImage: `url("${book.cover}")` }} className="book books-1"></div>)
                         }
-                        <div key="piano_info" style={{ backgroundImage: `url("images/piano_info.jpg")` }} onClick={() => Inertia.get('articles')} className="book books-1"></div>
                     </div>
                 </section>
                 <section className={`container my-8 moving-section screen-2 ${screen === Screen.Videos ? 'current' : ''}`}>

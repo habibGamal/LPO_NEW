@@ -20,7 +20,7 @@ export default function Images() {
                 />
                 <Choice
                     imgSrc='/images/instructor.png'
-                    title={t('المدرس', 'Instructor')}
+                    title={t('جلسات', 'Sessions')}
                     onClick={() => {
                         Inertia.get(Assets.getAssets(AssetsName.authorImages))
                     }}
