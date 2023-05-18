@@ -11,18 +11,8 @@ enum Screen {
     Books,
     Videos,
 }
-export default function Index({ booksDB }: { booksDB: BookDB[] }) {
-    const books = booksDB.map((book) => new Book(book));
-    const goToBook = (book: Book) => {
-        if (book.videos.length > 0) {
-            Inertia.get(`books/${book.id}`)
-        } else {
-            window.open(book.pdf, "_blank");
-        }
-    };
-    // const toBooks = () => {
-    //     setScreen(Screen.Books);
-    // };
+export default function Index({ bookDB }: { bookDB: BookDB }) {
+    const book = new Book(bookDB);
     const t = useTranslate();
     return (
         <>
@@ -67,86 +57,26 @@ export default function Index({ booksDB }: { booksDB: BookDB[] }) {
                             whileInView={{ x: 0, opacity: 1 }}
                             viewport={{ once: true }}
                             className="h-full w-full object-contain mx-auto"
-                            src="./images/material.png"
+                            src="/images/material.png"
                             alt=""
                         />
                     </div>
                 </div>
             </section>
-            <div className="container">
-                <div className="box-out">
-                    <div
-                        key="piano_info"
-                        style={{
-                            backgroundImage: `url("images/piano_info.jpg")`,
-                        }}
-                        onClick={() => Inertia.get("articles")}
-                        className="book books-1"
-                    ></div>
-                    {books.map((book) => (
-                        <div
-                            key={book.id}
-                            onClick={() => goToBook(book)}
-                            style={{
-                                backgroundImage: `url("${book.cover}")`,
-                            }}
-                            className="book books-1"
-                        ></div>
-                    ))}
-                </div>
-            </div>
-            {/* <div className="move-sections-container ltr">
-                <section
-                    className={`container moving-section screen-1 ${
-                        screen === Screen.Books ? "current" : ""
-                    }`}
-                >
-                    <div className="box-out">
-                        <div
-                            key="piano_info"
-                            style={{
-                                backgroundImage: `url("images/piano_info.jpg")`,
-                            }}
-                            onClick={() => Inertia.get("articles")}
-                            className="book books-1"
-                        ></div>
-                        {books.map((book) => (
-                            <div
-                                key={book.id}
-                                onClick={() => toVideos(book)}
-                                style={{
-                                    backgroundImage: `url("${book.cover}")`,
-                                }}
-                                className="book books-1"
-                            ></div>
-                        ))}
-                    </div>
-                </section>
-                <section
-                    className={`container my-8 moving-section screen-2 ${
-                        screen === Screen.Videos ? "current" : ""
-                    }`}
-                >
-                    {currentBook ? (
-                        <VideosScreen videos={currentBook.videos} />
+            <div className="container my-8">
+                    {book ? (
+                        <VideosScreen videos={book.videos} />
                     ) : (
                         ""
                     )}
                     <a
                         className="btn block my-4 mx-auto w-fit hover:text-white"
-                        href={currentBook?.pdf}
+                        href={book?.pdf}
                         target="_blank"
                     >
                         Download PDF
                     </a>
-                    <button
-                        onClick={toBooks}
-                        className="btn block my-4 mx-auto"
-                    >
-                        Back to books
-                    </button>
-                </section>
-            </div> */}
+            </div>
             <section className="m-10"></section>
         </>
     );

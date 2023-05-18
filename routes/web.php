@@ -65,6 +65,7 @@ Route::middleware(['auth','activated'])->group(function () {
     Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
     Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
+    Route::get('/books/{book}', [BookController::class, 'show'])->name('books.index');
 
     Route::get('/meetings/online', function () {
         return Inertia::render('Meetings/Online');

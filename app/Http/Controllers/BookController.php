@@ -80,7 +80,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return Inertia::render('Material/Single', ['bookDB' => $book]);
     }
 
     /**
