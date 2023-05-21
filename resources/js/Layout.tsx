@@ -190,7 +190,7 @@ const ToTopBtn = ({
 const Footer = () => (
     <footer className="bg-black text-white p-4 text-center">
         All Copyrights &copy; reserved for Dr. Maha Ahmed Qassem & Eng. Habib
-        Gamal {new Date().getFullYear()} v.1.0
+        Gamal {new Date().getFullYear()} v.1.0 last update 2023-05-21
     </footer>
 );
 export default function Layout(props: { children: JSX.Element }) {
