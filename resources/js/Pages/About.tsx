@@ -263,23 +263,6 @@ export default function About() {
             />
             <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-8 my-32">
                 <Card
-                    imgSrc="images/dr_abrar.jpg"
-                    name={t(
-                        "أ.د/ أبرار مصطفى إبراهيم",
-                        "Prof. Abrar Mustafa Ibrahim"
-                    )}
-                    list={[
-                        t(
-                            "منصب: أستاذ النظريات والتأليف بقسم التربية الموسيقية بكلية التربية النوعية، جامعة أسيوط.",
-                            "Position: Professor of Theories and Composition in the Department of Music Education at the Faculty of Specific Education, Assiut University."
-                        ),
-                        t(
-                            "المدير السابق: تولى منصب نائب عميد كلية التربية النوعية لشئون التعليم والطلاب، جامعة أسيوط.",
-                            "Former Director: Served as Vice Dean of the Faculty of Specific Education for Education and Student Affairs, Assiut University."
-                        ),
-                    ]}
-                />
-                <Card
                     imgSrc="images/dr_ali.jpg"
                     name={t(
                         "أ.د/ علي حسين النجار",
@@ -296,6 +279,23 @@ export default function About() {
                         ),
                     ]}
                     delay={0.2}
+                />
+                <Card
+                    imgSrc="images/dr_abrar.jpg"
+                    name={t(
+                        "أ.د/ أبرار مصطفى إبراهيم",
+                        "Prof. Abrar Mustafa Ibrahim"
+                    )}
+                    list={[
+                        t(
+                            "منصب: أستاذ النظريات والتأليف بقسم التربية الموسيقية بكلية التربية النوعية، جامعة أسيوط.",
+                            "Position: Professor of Theories and Composition in the Department of Music Education at the Faculty of Specific Education, Assiut University."
+                        ),
+                        t(
+                            "المدير السابق: تولى منصب نائب عميد كلية التربية النوعية لشئون التعليم والطلاب، جامعة أسيوط.",
+                            "Former Director: Served as Vice Dean of the Faculty of Specific Education for Education and Student Affairs, Assiut University."
+                        ),
+                    ]}
                 />
                 <Card
                     imgSrc="images/dr_saad.jpg"
