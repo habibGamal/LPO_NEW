@@ -10,14 +10,15 @@
 }
 body {
     color: #273044;
+    background-color: #fafafa;
 }
 .btn {
-    @apply px-8 py-4 uppercase bg-main text-white rounded-full font-bold text-lg transition-colors ease-in-out duration-300 hover:bg-second;
+    @apply px-8 py-4 uppercase bg-main text-white rounded-2xl font-bold text-2xl transition-colors ease-in-out duration-300 hover:bg-second;
 }
 .btn.to-top {
     @apply p-0 w-[65px] h-[65px] rounded-full  fixed bottom-10 right-10;
 }
-.rtl {
+[lang="ar"] .rtl {
     text-align: right;
     h1,
     h2,
@@ -26,9 +27,9 @@ body {
     h5,
     h6,
     span.highlight-header,
-    a {
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-            Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    a,
+    li {
+        font-family: "Tajawal";
     }
 }
 .rtl * {
@@ -37,7 +38,8 @@ body {
 .ltr {
     text-align: left;
 }
-.ltr , .ltr * {
+.ltr,
+.ltr * {
     direction: ltr;
 }
 @media (min-width: 1024px) {
@@ -51,31 +53,39 @@ body {
 .question {
     @apply text-2xl  mb-4 font-bold bg-ov-white rounded w-fit p-2 px-4;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a {
-    font-family: "Montserrat";
+[lang="en"] {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    a,
+    p,
+    span,
+    li,
+    label,
+    input,
+    option,
+    textarea {
+        font-family: "Poppins";
+    }
 }
 
-p,
-span,
-li,
-label,
-input,
-option,
-textarea {
-    font-family: "Open Sans";
+.font-tajawal {
+    font-family: "Tajawal";
 }
-.font-open-sans {
-    font-family: "Open Sans";
+
+.font-ZenMaruGothic {
+    font-family: "ZenMaruGothic" !important;
+}
+[lang="ar"] {
+    .font-ZenMaruGothic {
+        font-family: "Tajawal" !important;
+    }
 }
 span.highlight-header {
-    font-family: "Montserrat";
+    font-family: "Tajawal";
     @apply text-main;
 }
 span.highlight-text {
@@ -90,11 +100,9 @@ ol {
 
 // small screen navigation
 .nav {
-    @media screen and (max-width: 1536px) {
-        @apply flex-col fixed top-[0px] overflow-y-scroll pt-16 h-screen bg-ov-white p-4 z-50 rounded-b;
-        li {
-            @apply mx-12;
-        }
+    @apply flex flex-col transition-transform gap-6 fixed top-[0px] overflow-y-scroll pt-16 h-screen bg-ov-white p-4 z-50 rounded-b;
+    li {
+        @apply mx-12;
     }
 }
 
@@ -253,7 +261,7 @@ input[type="file"] {
     color: rgba(0, 0, 0, 0.25);
 }
 .ant-message .anticon.anticon-loading.anticon-spin {
-    top:0;
+    top: 0;
     margin-right: unset;
 }
 .anticon {
@@ -278,4 +286,42 @@ input[type="file"] {
 }
 .resizable-title {
     @apply text-2xl text-center md:text-3xl lg:text-4xl xl:text-5xl mb-4 lg:mb-8  font-bold uppercase;
+}
+.point-before {
+    @apply relative;
+}
+.point-before::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #e93d81;
+    border-radius: 100%;
+    top: 50%;
+    left: -30px;
+    transform: translateY(-50%);
+}
+
+[lang="ar"] .point-before::before {
+    right: -30px;
+    left: unset;
+}
+
+.dots {
+    @apply relative;
+}
+.dots::before {
+    content: "";
+    position: absolute;
+    background-image: url("./imgs/dots.png");
+    width: 75px;
+    aspect-ratio: 1/1;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    transform: rotate(45deg) translate(-50%,10%);
+}
+
+[lang="ar"] .dots::before {
+    transform: rotate(45deg) translate(10%,-50%);
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 type AppState = {
     auth: boolean,
@@ -17,6 +17,19 @@ export default function AppContext({ children }: { children: JSX.Element }) {
         lang: 'en',
         flashMessage: null,
     })
+    useEffect(() => {
+        const lang = localStorage.getItem('lang')
+        if (lang) {
+            setAppState((state) => ({ ...state, lang }))
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('lang', appState.lang)
+        document.documentElement.lang = appState.lang
+    }, [appState.lang])
+
+
     return (
         <ContextApi.Provider value={[appState, setAppState]}>
             {children}

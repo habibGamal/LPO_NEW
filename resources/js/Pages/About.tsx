@@ -3,195 +3,331 @@ import { motion } from "framer-motion";
 import useTranslate from "../Hooks/useTranslate";
 import { ContextApi } from "../Contexts/AppContext";
 import IDCard from "../Components/IDCard";
-
+import { useMediaQuery } from "../Hooks/useMediaQuery";
+import { up } from "../Animation/movements";
+import SectionTitle from "../Components/SectionTitle";
+const Card = ({
+    imgSrc,
+    name,
+    list,
+    completeList,
+    delay,
+}: {
+    imgSrc: string;
+    name: string;
+    list: string[];
+    completeList?: string[];
+    delay?: number;
+}) => (
+    <motion.div {...up(delay)} className="rounded-3xl bg-white pb-8 mt-32">
+        <img
+            className="mx-auto -translate-y-1/2 -mb-8 w-[150px] aspect-square object-cover rounded-full object-top"
+            src={imgSrc}
+        />
+        <h4 className="text-xl sm:text-2xl font-bold text-center font-ZenMaruGothic mb-6">
+            {name}
+        </h4>
+        <ul className="sm:text-lg list-disc space-y-2 text-blueblack-500 pb-8 px-16">
+            {list.map((item) => (
+                <li>{item}</li>
+            ))}
+        </ul>
+        <button className="border-b border-pink-500 hover:border-blueblack-500 text-xl text-pink-500 hover:text-blueblack-500 font-medium mx-auto block">
+            More
+        </button>
+    </motion.div>
+);
+const Section = ({
+    imgSrc,
+    name,
+    list,
+    alternate,
+    last,
+    delay,
+}: {
+    imgSrc: string;
+    name: string;
+    list: string[];
+    alternate?: boolean;
+    last?: boolean;
+    delay?: number;
+}) => {
+    const isDesktop = useMediaQuery("lg");
+    return isDesktop ? (
+        <motion.div {...up(delay)} className="grid grid-cols-[45%10%45%]">
+            <img
+                className={`py-8 mx-auto ${alternate && "order-3"}`}
+                src={imgSrc}
+                alt=""
+            />
+            <div className={`${alternate && "order-2"}`}>
+                <div className="rounded-full mx-auto bg-[#fafafa] border-2 border-pink-500 w-[40px] aspect-square"></div>
+                <div className="h-full w-[2px] bg-pink-500 mx-auto"></div>
+                {last && (
+                    <div className="rounded-full mx-auto bg-pink-500 border-2 border-pink-500 w-[40px] aspect-square"></div>
+                )}
+            </div>
+            <div className={`p-8 ${alternate && "order-1"}`}>
+                <h4 className="point-before text-2xl font-medium mb-4">
+                    {name}
+                </h4>
+                <ul className="text-lg list-disc space-y-2 text-blueblack-500 pb-8 px-8">
+                    {list.map((item) => (
+                        <li>{item}</li>
+                    ))}
+                </ul>
+            </div>
+        </motion.div>
+    ) : (
+        <div className="grid">
+            <img className={`py-8 mx-auto`} src={imgSrc} alt="" />
+            <div className={`p-6`}>
+                <h4 className="point-before text-2xl font-medium mb-4">
+                    {name}
+                </h4>
+                <ul className="sm:text-lg list-disc space-y-2 text-blueblack-500 pb-8 px-4">
+                    {list.map((item) => (
+                        <li>{item}</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
+};
+const TargetSections = () => {
+    const t = useTranslate();
+    return (
+        <>
+            <Section
+                imgSrc="/images/decore/books-and-cuppng.png"
+                name={t("المعرفة والفهم", "Knowledge and understanding")}
+                list={[
+                    t(
+                        "أن يتعرف الطالب على الجلسة الصحيحة ووضع اليدين علي الة البيانو",
+                        "To familiarize the student with the correct sitting and placement of hands on the piano."
+                    ),
+                    t(
+                        "أن يتعرف الطالب على أساسيات العزف على آلة البيانو وقراءة النوتة الموسيقية",
+                        "To familiarize the student with the basics of playing the piano and reading musical notes"
+                    ),
+                ]}
+            />
+            <Section
+                imgSrc="/images/decore/working-on-computer.png"
+                name={t("المهارات الذهنية", "Mental skills")}
+                list={[
+                    t(
+                        "القدرة على التأزر العضلي والتحكم في كلتا اليدين",
+                        "The ability to coordinate and control muscles in both hands"
+                    ),
+                    t(
+                        "القدرة على قرائة النغمات في المدرج الكبير في مفتاحين",
+                        "Ability to read tones in the grandstand in two keys"
+                    ),
+                    t(
+                        "القدرة على التأزر بين القراءة والعزف من خلال القراءة الوهلية",
+                        "The ability to synergize between reading and playing through imaginative reading"
+                    ),
+                    t(
+                        "القدرة على التذكر (الفوتوغرافي - التحليلي - السمعى)",
+                        "Ability to remember (Photographic - Analytical - Auditory)"
+                    ),
+                ]}
+                alternate
+            />
+            <Section
+                imgSrc="/images/decore/studying-with-book-and-laptop.png"
+                name={t(
+                    "المهارات المهنية والعملية",
+                    "Professional and practical skills"
+                )}
+                list={[
+                    t(
+                        "القدرة على تقوية الأصابع الخمس لليدين وليونتها وخاصة الإبهام والأداء بشكل سليم",
+                        "The ability to strengthen the five fingers of the hands and their flexibility, especially the thumb, and to perform properly"
+                    ),
+                    t(
+                        "القدرة على أداء السلالم والأربيجات في حدود الأوكتاف الواحد في السلالم الكبيرة والصغيرة",
+                        "The ability to perform stairs and arpeggios within one octave on large and small stairs"
+                    ),
+                    t(
+                        "القدرة على الأداء السليم للمقطوعات الموسيقية المقررة",
+                        "The ability to properly perform the prescribed musical compositions"
+                    ),
+                ]}
+            />
+            <Section
+                imgSrc="/images/decore/headphones-taking-notes.png"
+                name={t(
+                    "المهارات العامة والقابلة للانتقال",
+                    "General and transferable skills"
+                )}
+                list={[
+                    t(
+                        "توجيه اهتمامات الطلاب لهواية محببه إليهم مثل العزف على الآلات الموسيقية واستخدامها الاستخدام الأمثل",
+                        "Directing students' interests to a hobby they like, such as playing musical instruments and using them optimally"
+                    ),
+                    t(
+                        "تبادل الثقة بالنفس لدي الطلاب من خلال عزف الآلة والتمكن من الأداء الجيد",
+                        "Exchanging the students' self-confidence by playing the instrument and being able to perform well"
+                    ),
+                ]}
+                alternate
+                last
+            />
+        </>
+    );
+};
 export default function About() {
     const t = useTranslate();
-    const [{ lang }] = useContext(ContextApi)!;
     return (
         <div className="container lg:text-align-inherit">
-            <div className="flex justify-center my-8">
-                <div className="rounded-full w-48 aspect-square overflow-hidden border-2 border-solid border-white outline-3 outline-gray-200 outline">
+            <div className="relative my-16">
+                <div className="absolute grid place-items-center inset-0">
+                    <div className="text-center md:mb-16">
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl mb-2 md:mb-4 font-medium capitalize text-white">
+                            {t("عنا", "About Us")}
+                        </h3>
+                        <h2 className=" md:text-lg lg:text-2xl mb-4 font-medium capitalize text-[#E0E9F5]">
+                            {t(
+                                <>
+                                    اكتشف رحلتك الموسيقية مع <br />
+                                    منصتنا لتعلم البيانو عبر الإنترنت.
+                                </>,
+                                <>
+                                    Unlock Your Musical Journey <br /> with Our
+                                    Online Piano Platform
+                                </>
+                            )}
+                        </h2>
+                    </div>
+                </div>
+                <img className="hidden md:block" src="/images/about_bg.png" />
+                <img
+                    className="hidden sm:block md:hidden"
+                    src="/images/about_bg_small.png"
+                />
+                <img
+                    className="block sm:hidden"
+                    src="/images/about_bg_xsmall.png"
+                />
+            </div>
+            <div className="grid lg:grid-cols-2 items-center rounded-3xl bg-pink-500 my-16">
+                <div className="bg-white rounded-3xl">
                     <img
-                        className="w-full"
-                        src="./images/personal_photo.png"
-                        alt=""
+                        className="w-full rounded-3xl object-[50%8%] max-h-[300px] object-cover"
+                        src="images/dr_maha.jpg"
                     />
+                    <div className="px-10 md:px-16 py-8">
+                        <ul className="md:text-xl space-y-2 mb-8 list-disc text-[#505050]">
+                            <li>
+                                {t(
+                                    "محاضر مساعد في قسم التعليم الموسيقي بكلية التربية النوعية في جامعة أسيوط.",
+                                    "Assistant Lecturer at the Department of Musical Education in the Faculty of Specific Education at Assiut University."
+                                )}
+                            </li>
+                            <li>
+                                {t(
+                                    "تم تدريبه وقيادة فريق الموسيقى في الكلية.",
+                                    "Trained and led the college's musical team."
+                                )}
+                            </li>
+                            <li>
+                                {t(
+                                    "حاصل على شهادة تدريب معتمدة من جامعة بابسون الأمريكية للمشاركة في مشروع...",
+                                    "Holds a certified training certificate from the American Babson University for participation in the project to..."
+                                )}
+                            </li>
+                        </ul>
+                        <button className=" md:py-4 py-2 px-6 text-lg rounded-2xl bg-blueblack-500 hover:bg-blueblack-600 font-medium text-white">
+                            More
+                        </button>
+                    </div>
+                </div>
+                <div className="p-8 md:p-16">
+                    <p className="text-lg md:text-2xl 2xl:text-3xl text-[#FFF3F3] leading-relaxed md:!leading-loose">
+                        {t(
+                            `
+                            البرنامج جزء من متطلبات الحصول على درجة دكتوراة في الفلسفة في التربية النوعية تخصص التربية الموسيقية ( بيانو )
+                            تحت عنوان
+                            " برنامج قائم على التعليم المدمج لرفع مستوى أداء الطلاب على آلة البيانو "
+                            `,
+                            "The program is part of the requirements for obtaining a Doctor of Philosophy degree in Specific Education, specializing in Music Education (Piano) under the title “A program based on blended learning to raise the level of students’ performance on the piano.”"
+                        )}
+                    </p>
                 </div>
             </div>
-            <h1 className="text-4xl border-b-2 border-main w-fit pb-4 font-sans mx-auto mb-4 text-center">
-                {t("فكرة البرنامج", "Program idea")}
-            </h1>
-            <h2 className="text-center text-3xl font-bold font-sans">
-                {t("م.م/ مها أحمد قاسم ", "Lect. Maha Ahmed Qassem")}
-            </h2>
-            <h3 className="text-3xl p-4 leading-tight border-2 rounded border-main bg-gray-50 w-fit pb-4 font-sans mx-auto my-8 text-center">
-                {t(
-                    `
-                البرنامج جزء من متطلبات الحصول على درجة دكتوراة في الفلسفة في التربية النوعية تخصص التربية الموسيقية ( بيانو )
-                تحت عنوان
-                " برنامج قائم على التعليم المدمج لرفع مستوى أداء الطلاب على آلة البيانو "
-                `,
-                    "The program is part of the requirements for obtaining a Doctor of Philosophy degree in Specific Education, specializing in Music Education (Piano) under the title “A program based on blended learning to raise the level of students’ performance on the piano.”"
-                )}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-8 ">
-                <div className="block">
-                    <ul className="m-6 flex flex-col gap-4">
-                        <IDCard
-                            name={t(
-                                "م.م/ مها أحمد قاسم",
-                                "Lect. Maha Ahmed Qassem"
-                            )}
-                            title={t(
-                                'مدرس مساعد - قسم التربية الموسيقية - كلية التربية النوعية - جامعة أسيوط - شاركت في تدريب وقيادة الفريق الموسيقي بالكلية - حاصلة على شهادة تدريبية معتمدة من جامعة Babson الأمريكية للمشاركة في مشروع تعزيز ريادة الأعمال  والمشروعات الممول من الوكالة الأمريكية للتنمية الدولية ( Seed ) - شاركت كعضو في لجنة تحكيم البرنامج القومي للحاضنات التكنولوجية المتخصصة "إنطلاق" بحاضنة الشركات همة - شاركت كعضو في لجنة تحكيم برنامج InoEgypt بحاضنة الشركات همة بجامعة أسيوط .',
-                                'Assistant Lecturer - Department of Musical Education - Faculty of Specific Education - Assiut University - Participated in training and leading the college\'s musical team - She holds a certified training certificate from the American Babson University to participate in the project to promote entrepreneurship and projects funded by the US Agency for International Development (Seed) - She participated as a member In the arbitration committee of the national program for specialized technology incubators "Intilaq" at the Hemma incubator - I participated as a member of the judging committee of the InoEgypt program at the Hemma corporate incubator at Assiut University.'
-                            )}
-                            imgSrc="images/dr_maha.jpg"
-                        />
-                    </ul>
-                    <h2
-                        className={`font-sans text-3xl bg-gray-100 p-2 px-3 w-fit ${
-                            lang === "ar" ? "border-r-4" : "border-l-4"
-                        } border-main`}
-                    >
-                        {t("تحت إشراف كلاً من", "Under the supervision of")}
-                    </h2>
-                    <ul className="m-6 flex flex-col gap-4">
-                        <IDCard
-                            name={t(
-                                "أ.د/ علي حسين النجار",
-                                "Prof. Ali Hussein Al-Najjar"
-                            )}
-                            title={t(
-                                "أستاذ الآداء ( بيانو) بقسم التربية الموسيقية  ومدير مركز الفنون الأسبق بكلية التربية النوعية - جامعة عين شمس شارك في الاشراف على العديد من رسائل الماجستير والدكتوراه – له العديد من المؤلفات الموسيقية للآلة البيانو - شارك كمايستو وبيانيست في العديد من الحفلات الموسيقية بدار الأوبرا المصرية  – عضو لجنة المحكمين لفحص الإنتاج العلمي لشغل وظائف الأساتذة والاساتذة المساعيدين -  قطاع التربية الموسيقية  ",
-                                "Professor of performance (piano) in the Department of Music Education And former director of the Art Center at the Faculty of Specific Education - Ain Shams University Participated in the supervision of several master's and doctoral dissertations - He has many musical compositions for the piano - As a maesto and pianist participated in many concerts at the Egyptian Opera House - Member of the arbitrators committee to examine scientific production for the positions of professors and assistant professors - Music Education Sector"
-                            )}
-                            imgSrc="images/dr_ali.jpg"
-                        />
-                        <IDCard
-                            name={t(
-                                "أ.د/ أبرار مصطفى إبراهيم",
-                                "Prof. Abrar Mustafa Ibrahim"
-                            )}
-                            title={t(
-                                "أستاذ النظريات والتأليف بقسم التربية الموسيقية  وكيل كلية التربية النوعية لشئون التعليم والطلاب  - جامعة أسيوط  شاركت في الاشراف على العديد من رسائل الماجستير والدكتوراه – لها العديد من المؤلفات في مجال النظريات والتأليف عضو اللجنة العليا للانشطة الطلابية - عضو لجنة المحكمين لفخص الإنتاج العلمي لشغل وظائف الأساتذة والاساتذة المساعيدين -  قطاع التربية الموسيقية  ",
-                                "Professor of Theories and Composition, Department of Musical Education Vice Dean of the Faculty of Specific Education for Education and Student Affairs - Assiut University Participated in supervising many master's and doctoral dissertations - has many publications in the field of theories and authorship Member of the Higher Committee for Student Activities - Member of the Arbitrators Committee for the examination of scientific production for the positions of professors and assistant professors - Music Education Sector"
-                            )}
-                            imgSrc="images/dr_abrar.jpg"
-                        />
-                        <IDCard
-                            name={t(
-                                "د/ سعد حسن محي الدين",
-                                "Dr. Saad Hassan Mohie Eldin"
-                            )}
-                            title={t(
-                                "المدرس بقسم تكنولوجيا التعليم  كلية التربية النوعية -  جامعة أسيوط     نائب مدير وحدة ضمان الجودة بكلية التربية النوعية - المشرف على وحدة التقويم والقياس بكلية التربية النوعية -  عضو لجنة إعداد المقررات الإلكترونية لمرحلة البكالوريوس – الاشراف على العديد من رسائل الماجستير والدكتوراه – له العديد من المؤلفات في مجال تكنولوجيا التعليم والحاسب الالي",
-                                "Lecturer in the Department of Educational Technology Faculty of Specific Education - Assiut University Deputy Director of the Quality Assurance Unit at the Faculty of Specific Education - Supervisor of the Evaluation and Measurement Unit at the Faculty of Specific Education - Member of the Committee for Preparing Electronic Courses for the Bachelor's Degree - Supervising many master's and doctoral dissertations - Has many publications in the field of educational technology and computers"
-                            )}
-                            imgSrc="images/dr_saad.jpg"
-                        />
-                    </ul>
-                </div>
-            </div>
-            <motion.h1
-                initial={{ x: 350, opacity: 0 }}
-                transition={{ duration: 1.3, delay: 0, type: "spring" }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-4xl font-bold font-sans m-4 mb-16 text-center"
-            >
-                {t(
-                    "نواتج التعلم المستهدفة من الموقع",
-                    "Targeted learning outcomes from the site"
-                )}
-            </motion.h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
-                <Block
-                    title={t("المعرفة والفهم", "knowledge and understanding")}
-                    sentences={[
+
+            <SectionTitle
+                title={t("تحت إشراف كلاً من", "Under the supervision of")}
+            />
+            <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-8 my-32">
+                <Card
+                    imgSrc="images/dr_abrar.jpg"
+                    name={t(
+                        "أ.د/ أبرار مصطفى إبراهيم",
+                        "Prof. Abrar Mustafa Ibrahim"
+                    )}
+                    list={[
                         t(
-                            "أن يتعرف الطالب على الجلسة الصحيحة ووضع اليدين علي الة البيانو",
-                            "To familiarize the student with the correct sitting and placement of hands on the piano."
+                            "منصب: أستاذ النظريات والتأليف بقسم التربية الموسيقية بكلية التربية النوعية، جامعة أسيوط.",
+                            "Position: Professor of Theories and Composition in the Department of Music Education at the Faculty of Specific Education, Assiut University."
                         ),
                         t(
-                            "أن يتعرف الطالب على أساسيات العزف على آلة البيانو وقراءة النوتة الموسيقية",
-                            "To familiarize the student with the basics of playing the piano and reading musical notes"
+                            "المدير السابق: تولى منصب نائب عميد كلية التربية النوعية لشئون التعليم والطلاب، جامعة أسيوط.",
+                            "Former Director: Served as Vice Dean of the Faculty of Specific Education for Education and Student Affairs, Assiut University."
                         ),
                     ]}
-                    delay={0}
                 />
-                <Block
-                    title={t("المهارات الذهنية", "mental skills")}
-                    sentences={[
+                <Card
+                    imgSrc="images/dr_ali.jpg"
+                    name={t(
+                        "أ.د/ علي حسين النجار",
+                        "Prof. Ali Hussein Al-Najjar"
+                    )}
+                    list={[
                         t(
-                            "القدرة على التأزر العضلي والتحكم في كلتا اليدين",
-                            "The ability to coordinate and control muscles in both hands"
+                            "منصب: أستاذ الآداء ( بيانو) بقسم التربية الموسيقية بكلية التربية النوعية، جامعة عين شمس.",
+                            "Position: Professor of performance (piano) in the Department of Music Education at the Faculty of Specific Education, Ain Shams University."
                         ),
                         t(
-                            "القدرة على قرائة النغمات في المدرج الكبير في مفتاحين",
-                            "Ability to read tones in the grandstand in two keys"
-                        ),
-                        t(
-                            "القدرة على التأزر بين القراءة والعزف من خلال القراءة الوهلية",
-                            "The ability to synergize between reading and playing through imaginative reading"
-                        ),
-                        t(
-                            "القدرة على التذكر (الفوتوغرافي - التحليلي - السمعى)",
-                            "Ability to remember (Photographic - Analytical - Auditory)"
+                            "المدير السابق: تولى منصب مدير مركز الفنون الأسبق بكلية التربية النوعية، جامعة عين شمس.",
+                            "Former Director: Served as Director of the Art Center at the Faculty of Specific Education, Ain Shams University."
                         ),
                     ]}
                     delay={0.2}
                 />
-                <Block
-                    title={t(
-                        "المهارات المهنية والعملية",
-                        "Professional and practical skills"
+                <Card
+                    imgSrc="images/dr_saad.jpg"
+                    name={t(
+                        "د/ سعد حسن محي الدين",
+                        "Dr. Saad Hassan Mohie Eldin"
                     )}
-                    sentences={[
+                    list={[
                         t(
-                            "القدرة على تقوية الأصابع الخمس لليدين وليونتها وخاصة الإبهام والأداء بشكل سليم",
-                            "The ability to strengthen the five fingers of the hands and their flexibility, especially the thumb, and to perform properly"
+                            "منصب: مدرس بقسم تكنولوجيا التعليم بكلية التربية النوعية، جامعة أسيوط.",
+                            "Position: Lecturer in the Department of Educational Technology at the Faculty of Specific Education, Assiut University."
                         ),
                         t(
-                            "القدرة على أداء السلالم والأربيجات في حدود الأوكتاف الواحد في السلالم الكبيرة والصغيرة",
-                            "The ability to perform stairs and arpeggios within one octave on large and small stairs"
-                        ),
-                        t(
-                            "القدرة على الأداء السليم للمقطوعات الموسيقية المقررة",
-                            "The ability to properly perform the prescribed musical compositions"
+                            "المدير السابق: تولى منصب نائب مدير وحدة ضمان الجودة بكلية التربية النوعية، جامعة أسيوط.",
+                            "Former Director: Served as Deputy Director of the Quality Assurance Unit at the Faculty of Specific Education, Assiut University."
                         ),
                     ]}
                     delay={0.4}
                 />
-                <Block
-                    title={t(
-                        "المهارات العامة والقابلة للانتقال",
-                        "General and transferable skills"
-                    )}
-                    sentences={[
-                        t(
-                            "توجيه اهتمامات الطلاب لهواية محببه إليهم مثل العزف على الآلات الموسيقية واستخدامها الاستخدام الأمثل",
-                            "Directing students' interests to a hobby they like, such as playing musical instruments and using them optimally"
-                        ),
-                        t(
-                            "تبادل الثقة بالنفس لدي الطلاب من خلال عزف الآلة والتمكن من الأداء الجيد",
-                            "Exchanging the students' self-confidence by playing the instrument and being able to perform well"
-                        ),
-                    ]}
-                    delay={0.6}
-                />
             </div>
-            <motion.h1
-                initial={{ x: 350, opacity: 0 }}
-                transition={{ duration: 1.3, delay: 0.4, type: "spring" }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-4xl font-bold font-sans m-4 mb-16 text-center"
-            >
-                {t("محتويات الموقع", "Site contents")}
-            </motion.h1>
-            <div className="grid grid-cols-1 gap-8 ">
-                <TableItem
+
+            <SectionTitle
+                title={t(
+                    "نواتج التعلم المستهدفة من الموقع",
+                    "Site's Targeted Learning Outcomes"
+                )}
+            />
+            <TargetSections />
+
+            <SectionTitle title={t("محتويات الموقع", "Site contents")} />
+            <div className="grid grid-cols-1 gap-8">
+                <SiteContentItem
                     title={t(
                         "تمارين تمهيدية للاصابع علي لوحة المفاتيح والجلسة الصحيحة من كتاب john Thomson",
                         "Introductory exercises for the fingers on the keyboard and the correct session from the book by John Thomson"
@@ -208,9 +344,8 @@ export default function About() {
                         "تصحيح الجلسة الخاطئة ووضع اليدين الخاطئ",
                         "correcting the wrong sitting and the wrong position of the hands"
                     )}
-                    delay={0.2}
                 />
-                <TableItem
+                <SiteContentItem
                     title={t(
                         "تمارين من كتاب Longo Book One A",
                         "Exercises from Longo Book One A"
@@ -227,9 +362,8 @@ export default function About() {
                         "تطبيق المرونة العضلية في باقي بنود مقرر البيانو",
                         "applying muscle flexibility in the rest of the piano course items"
                     )}
-                    delay={0.25}
                 />
-                <TableItem
+                <SiteContentItem
                     title={t(
                         "تمارين من كتاب Bartok Vol 1",
                         "Exercises from the book Bartok Vol 1"
@@ -246,9 +380,8 @@ export default function About() {
                         "السيطرة علي الاداء العضلي والنغمي",
                         "control of muscle and tonal performance"
                     )}
-                    delay={0.3}
                 />
-                <TableItem
+                <SiteContentItem
                     title={t("سلالم دو/,صول/ك", "stairs du/,sol/k")}
                     s1={t(
                         "اداء السلالم الكبيرة واقاربها الصغار",
@@ -262,9 +395,8 @@ export default function About() {
                         "تحليل عزفي للسلالم الكبيرة واقاربها",
                         "Instrumental analysis of the major scales and their relatives"
                     )}
-                    delay={0.35}
                 />
-                <TableItem
+                <SiteContentItem
                     title={t(
                         "تمارين من كتاب Beyer op.101",
                         "Exercises from the book Beyer op.101"
@@ -281,9 +413,8 @@ export default function About() {
                         "تطبيق المفاهيم التعبيرية اثناء اداء التمارين ذات الالحان البسيطة",
                         "Apply expressive concepts while performing exercises with simple melodies"
                     )}
-                    delay={0.4}
                 />
-                <TableItem
+                <SiteContentItem
                     title={t(
                         "مقطوعة شرقية بسيطة تناسب مستوى المتعلم",
                         "A simple oriental piece that suits the learner's level"
@@ -300,17 +431,13 @@ export default function About() {
                         "الادراك الحسي و السعي للمؤلفات الشرقية البسيطة والقدرة على تميزها",
                         "Sensory perception and pursuit of simple oriental compositions and the ability to distinguish them"
                     )}
-                    delay={0.45}
                 />
-                <TableItem
+                <SiteContentItem
                     title={t(
                         "مقطوعة غربية بسيطة من اي عصر",
                         "a simple western piece from any era"
                     )}
-                    s1={t(
-                        "اداء مقطوعة ذات طابع غربي",
-                        "Western performance"
-                    )}
+                    s1={t("اداء مقطوعة ذات طابع غربي", "Western performance")}
                     s2={t(
                         "تنمبة التذوق والاحساس بالذات اثناء العزف و القدرة على تحليل المقطوعات الغربية",
                         "Develop taste and sense of self while playing, and the ability to analyze Western compositions"
@@ -319,56 +446,13 @@ export default function About() {
                         "الادراك الحسي و السعي للمؤلفات الغربية البسيطة والقدرة على تميزها",
                         "Perception and pursuit of simple Western compositions and the ability to distinguish them"
                     )}
-                    delay={0.5}
                 />
             </div>
         </div>
     );
 }
 
-const Block = ({
-    title,
-    sentences,
-    delay,
-}: {
-    title: string;
-    sentences: string[];
-    delay: number;
-}) => {
-    const [{ lang }] = useContext(ContextApi)!;
-    return (
-        <div className="block">
-            <motion.h2
-                initial={{ y: 100, opacity: 0 }}
-                transition={{ duration: 1.3, delay: delay, type: "spring" }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                className={`font-sans text-3xl font-bold bg-gray-100 p-2 px-3 w-fit border-main ${
-                    lang === "ar" ? "border-r-4" : "border-l-4"
-                }`}
-            >
-                {title}
-            </motion.h2>
-            <motion.ol
-                className="list-decimal m-6"
-                initial={{ y: 100, opacity: 0 }}
-                transition={{
-                    duration: 1.3,
-                    delay: delay + 0.1,
-                    type: "spring",
-                }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-            >
-                {sentences.map((sentence, i) => (
-                    <li key={i}>{sentence}</li>
-                ))}
-            </motion.ol>
-        </div>
-    );
-};
-
-const TableItem = ({
+const SiteContentItem = ({
     title,
     s1,
     s2,
@@ -379,53 +463,32 @@ const TableItem = ({
     s1: string;
     s2: string;
     s3: string;
-    delay: number;
+    delay?: number;
 }) => {
-    const [{ lang }, setAppState] = useContext(ContextApi)!;
     const t = useTranslate();
     return (
-        <div className="block">
-            <motion.h2
-                initial={{ y: 100, opacity: 0 }}
-                transition={{ duration: 1.3, delay: delay, type: "spring" }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                className={`font-sans text-3xl font-bold bg-gray-100 p-2 px-3 w-fit border-main ${
-                    lang === "ar" ? "border-r-4" : "border-l-4"
-                }`}
-            >
-                {title}
-            </motion.h2>
-            <motion.ol
-                className="list-decimal m-6"
-                initial={{ y: 100, opacity: 0 }}
-                transition={{
-                    duration: 1.3,
-                    delay: delay + 0.1,
-                    type: "spring",
-                }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-            >
+        <motion.div {...up(delay)} className="block">
+            <h4 className="point-before text-2xl font-medium mb-4">{title}</h4>
+            <ul className="text-lg list-disc space-y-2 text-blueblack-500 pb-8 px-8">
                 <li>
-                    <span className="font-bold">
+                    <span className="font-medium">
                         {t("المعارف الرئيسية", "Key knowledge")} :{" "}
                     </span>
                     {s1}
                 </li>
                 <li>
-                    <span className="font-bold">
+                    <span className="font-medium">
                         {t("مهارات مهنية", "Professional Skills")} :{" "}
                     </span>
                     {s2}
                 </li>
                 <li>
-                    <span className="font-bold">
+                    <span className="font-medium">
                         {t("مهارات عامة", "General skills")} :{" "}
                     </span>
                     {s3}
                 </li>
-            </motion.ol>
-        </div>
+            </ul>
+        </motion.div>
     );
 };

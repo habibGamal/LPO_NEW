@@ -1,31 +1,51 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import React from "react";
 import useTranslate from "../Hooks/useTranslate";
+import { Facebook, Whatsapp } from "iconsax-react";
+import HomeTitle from "../Components/HomeTitle";
 export default function Contact() {
     const t = useTranslate();
     return (
-        <section className="bg-ov-white min-h-[91vh] flex  items-center">
-            <div className="container lg:py-16 py-4 grid grid-rows-auto gap-4 text-center lg:text-align-inherit lg:grid-cols-2 items-center justify-center">
-                <div>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl mb-4 lg:mb-8  font-bold uppercase">{t('تواصل معنا','Contact Us')} <br /> <span className="highlight-header"> {t('في اي وقت','any time')}</span></h2>
-                    <ul className="flex gap-4 justify-center lg:justify-start flex-wrap sm:text-xl font-[500]">
-                        <li><span className="highlight-text font-bold"> {t('رقم الهاتف','Phone')}</span> : 01098069075</li>
-                        <li><span className="highlight-text font-bold"> {t('البريد الالكتروني','Email')}</span> : maha.ahmed55.890@gmail.com</li>
-                    </ul>
-                    <div className="flex gap-8 my-4 justify-center lg:justify-start">
-                        <a href="https://web.facebook.com/profile.php?id=100010135451853" target="_blank" rel="noreferrer">
-                            <FontAwesomeIcon icon={faFacebook} size={'4x'} className="text-blue-600" />
-                        </a>
-                        <a href="https://wa.me/201098069075" target="_blank" rel="noreferrer">
-                            <FontAwesomeIcon icon={faWhatsapp} size={'4x'} className="text-green-600" />
-                        </a>
+        <section className="container px-4 mt-56 mb-16">
+                <div className="grid lg:max-h-[400px] gap-8 2xl:p-12 lg:gap-0 lg:grid-cols-2 justify-items-center items-center p-8 lg:mx-16 xl:mx-32 bg-pink-500 rounded-3xl lg:text-align-inherit">
+                    <div className=" mt-[-30%]">
+                        <img
+                            className="mx-auto max-w-[220px] w-[40vw] lg:w-[20vw] mb-4"
+                            src="./images/decore/elastic-mobile-profile.png"
+                            alt=""
+                        />
+                    </div>
+                    <div className="text-white">
+                        <HomeTitle className="!text-white">{t("تواصل معنا", "Contact Us")}</HomeTitle>
+                        <ul className={`list-disc  sm:text-xl  mx-8 sm:mx-16`}>
+                            <li>
+                                <strong> {t("رقم الهاتف", "Phone")}</strong> :
+                                01098069075
+                            </li>
+                            <li>
+                                <strong>
+                                    {t("البريد الالكتروني", "Email")}
+                                </strong>{" "}
+                                : maha.ahmed55.890@gmail.com
+                            </li>
+                        </ul>
+                        <div className="flex gap-4 text-[#E0E9F5] p-4 mx-4 sm:mx-8">
+                            <a
+                                href="https://web.facebook.com/profile.php?id=100010135451853"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <Facebook variant="Bulk" size={56} />
+                            </a>
+                            <a
+                                href="https://wa.me/201098069075"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <Whatsapp variant="Bulk" size={56} />
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div className="h-[400px]">
-                    <img className="h-full w-full object-contain mx-auto" src="./images/contact.png" alt="" />
-                </div>
-            </div>
-        </section>
+            </section>
     )
 }

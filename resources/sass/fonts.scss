@@ -1,17 +1,40 @@
 @font-face {
-    src: url('../fonts/Montserrat.ttf');
-    font-family: 'Montserrat';
+    src: url("../fonts/Montserrat.ttf");
+    font-family: "Montserrat";
 }
 @font-face {
-    src: url('../fonts/Montserrat-Bold.ttf');
-    font-family: 'Montserrat';
+    src: url("../fonts/Montserrat-Bold.ttf");
+    font-family: "Montserrat";
 }
 @font-face {
-    src: url('../fonts/Montserrat-ExtraBold.ttf');
-    font-family: 'Montserrat';
+    src: url("../fonts/Montserrat-ExtraBold.ttf");
+    font-family: "Montserrat";
 }
 @font-face {
-    src: url('../fonts/OpenSans-Regular.ttf');
-    font-family: 'Open Sans';
+    src: url("../fonts/OpenSans-Regular.ttf");
+    font-family: "Open Sans";
     font-weight: normal;
+}
+
+@font-face {
+    src: url("../fonts/Tajawal-Regular.ttf");
+    font-family: "Tajawal";
+    font-weight: normal;
+}
+@font-face {
+    src: url("../fonts/Tajawal-Medium.ttf");
+    font-family: "Tajawal";
+    font-weight: medium;
+}
+@font-face {
+    src: url("../fonts/Tajawal-Bold.ttf");
+    font-family: "Tajawal";
+    font-weight: bold;
+}
+
+
+@font-face {
+    src: url("../fonts/ZenMaruGothic-Bold.ttf");
+    font-family: "ZenMaruGothic";
+    font-weight: bold;
 }
