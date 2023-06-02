@@ -14,7 +14,7 @@ export default function Images() {
                     imgSrc='/images/decore/students.png'
                     title={t('الطلاب', 'Students')}
                     desc='Discover a wide range of student resources, including practice materials, exercises, sheets music.'
-                    btnText={t('استكشف الفيديوهات','Explore Videos')}
+                    btnText={t('استكشف الصور','Explore Images')}
                     onClick={() => {
                         Inertia.get(Assets.getAssets(AssetsName.studentImages))
                     }}
@@ -24,7 +24,7 @@ export default function Images() {
                     imgSrc='/images/decore/working-on-computer.png'
                     title={t('جلسات', 'Sessions')}
                     desc='Access exclusive resources for instructors, including teaching materials.'
-                    btnText={t('استكشف الفيديوهات','Explore Videos')}
+                    btnText={t('استكشف الصور','Explore Images')}
                     onClick={() => {
                         Inertia.get(Assets.getAssets(AssetsName.authorImages))
                     }}

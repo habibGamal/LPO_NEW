@@ -268,7 +268,6 @@ const EditImage = ({
     );
 };
 export default function ImagesIndex({ assetsDB }: { assetsDB: AssetsDB }) {
-    const t = useTranslate();
     const [{ isOpen, data: modalData }, open, close, setModalData] = useModal<{
         node: ImagesAssets;
         name: AssetsName;
@@ -293,7 +292,7 @@ export default function ImagesIndex({ assetsDB }: { assetsDB: AssetsDB }) {
                     {assets.images.map((node) => (
                         <div key={node.id} className="w-full relative h-[500px]">
                             <img
-                                className="w-full aspect-video object-contain h-full"
+                                className="w-full object-contain h-full"
                                 src={node.path}
                             />
                             <span className="block absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 rounded bg-[#0e0e0e61] text-white">

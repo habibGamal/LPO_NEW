@@ -22,12 +22,6 @@ export default function Single({ meetingDB }: { meetingDB: MeetingDB }) {
         <div className='container flex flex-col justify-center gap-4'>
             <h2 className="text-3xl lg:text-4xl m-16 text-center font-bold uppercase">{meeting.name}</h2>
             {
-                // meeting?.videos.map((video, i) => {
-                //     console.log(video);
-
-                //     return <div key={i} className="meeting-iframe" dangerouslySetInnerHTML={{ __html: video }} />;
-                // }
-                // )
                 <VideosScreen videos={meeting?.videos.map((video, index) => ({ link: video, name: "Video " + (index + 1) }))} />
             }
             {
