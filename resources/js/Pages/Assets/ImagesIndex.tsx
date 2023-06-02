@@ -286,7 +286,7 @@ export default function ImagesIndex({ assetsDB }: { assetsDB: AssetsDB }) {
                     <AddImages assets={assets} />
                 </Admin>
                 <Carousel
-                    className="rounded shadow p-4 bg-gray-100 my-4"
+                    className="rounded shadow ltr p-4 bg-gray-100 my-4"
                     dots={{ className: "text-black" }}
                 >
                     {assets.images.map((node) => (
