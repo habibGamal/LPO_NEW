@@ -9,8 +9,8 @@ export default function Layout({ children }: { children: JSX.Element }) {
         <section className=" min-h-[calc(100vh-53px-57px)]">
             <div className="container lg:py-16 py-4 text-center lg:text-align-inherit">
                 <SectionTitle
-                    className="!m-16"
-                    title={t("الفيديوهات و الصور", "Images | Videos")}
+                    className="mt-16 mb-48"
+                    title={t("معرض الوسائط المتعددة", "Multimedia Gallery")}
                 />
                 {children}
             </div>

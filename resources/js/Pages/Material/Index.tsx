@@ -1,152 +1,88 @@
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons/faCirclePlay";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { Book, BookDB } from "../../Models/Book";
 import { motion } from "framer-motion";
 import React from "react";
 import useTranslate from "../../Hooks/useTranslate";
 import { Inertia } from "@inertiajs/inertia";
-import VideosScreen from "../../Components/VideosScreen";
-enum Screen {
-    Books,
-    Videos,
-}
+import Header from "../../Components/Header";
+import { ArrowRight2 } from "iconsax-react";
+
+const BookCardBase = ({
+    name,
+    cover,
+    onClick,
+}: {
+    name: string;
+    cover: string;
+    onClick: () => void;
+}) => {
+    return (
+        <div className="rounded-xl hover:scale-105 transition-transform flex flex-col items-center border-[3px] p-4 sm:p-8 w-fit border-blueblack-400 bg-white">
+            <img
+                className="rounded-xl border-[3px] w-[300px] h-[425px] object-cover border-blueblack-200"
+                src={cover}
+            />
+            <div className="py-6 flex items-center gap-2 sm:gap-4 mt-4">
+                <h3 className="text-2xl font-medium">{name}</h3>
+                <div className="rounded-full flex-shrink-0 flex gap-4 items-center justify-between py-2 px-4 bg-pink-100">
+                    <div className="w-2 aspect-square rounded-full bg-pink-500"></div>
+                    <img
+                        className="w-6 opacity-70"
+                        src="images/decore/book.png"
+                    />
+                </div>
+            </div>
+            <button
+                onClick={onClick}
+                className="cursor-pointer hover:scale-105 hover:bg-blueblack-500 transition-all rounded-full p-4 bg-pink-500 w-fit"
+            >
+                <ArrowRight2 className="text-white" />
+            </button>
+        </div>
+    );
+};
+
+const BookCard = ({ book }: { book: Book }) => {
+    const goToBook = () => {
+        book.videos.length > 0
+            ? Inertia.get(`books/${book.id}`)
+            : window.open(book.pdf, "_blank");
+    };
+    return (
+        <BookCardBase name={book.name} cover={book.cover} onClick={goToBook} />
+    );
+};
+
 export default function Index({ booksDB }: { booksDB: BookDB[] }) {
     const books = booksDB.map((book) => new Book(book));
-    const goToBook = (book: Book) => {
-        if (book.videos.length > 0) {
-            Inertia.get(`books/${book.id}`)
-        } else {
-            window.open(book.pdf, "_blank");
-        }
-    };
-    // const toBooks = () => {
-    //     setScreen(Screen.Books);
-    // };
     const t = useTranslate();
     return (
         <>
-            <section className="bg-ov-white">
-                <div className="container lg:py-16 py-4 grid grid-rows-auto gap-4 text-center lg:text-align-inherit lg:grid-cols-2 items-center justify-between">
-                    <div>
-                        <motion.h3
-                            initial={{ x: -300, opacity: 0 }}
-                            transition={{ duration: 1, type: "spring" }}
-                            whileInView={{ x: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            className="text-3xl md:text-4xl lg:text-5xl mb-4 lg:mb-8  font-bold uppercase"
-                        >
-                            {t("مواد", "Study")} <br />{" "}
-                            <span className="highlight-header">
-                                {" "}
-                                {t("الدراسة", "material")}
-                            </span>
-                        </motion.h3>
-                        <motion.p
-                            initial={{ x: -300, opacity: 0 }}
-                            transition={{
-                                duration: 1,
-                                delay: 0.5,
-                                type: "spring",
-                            }}
-                            whileInView={{ x: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            className="text-xl font-[500]"
-                        >
-                            {t(
-                                "تكنيك البيانو. (Piano Technique). هو عباره عن تمارين رياضيه لالصابع يؤديها الدارس علي البيانو كل يوم بعقل واعي. وتركيز تام ألكتسابالمرونه والمهارات والعادات العضويه والذهنيه الصحيحة التي تخزن في اللاشعور نتيجة للتمرين اليومي ومن أهم كتب تكنيك البيانو جون طومسون، لونجو، بارتوك.",
-                                "piano technique. (Piano Technique). It is a finger exercise that the student performs on the piano every day with a conscious mind. And complete focus to acquire flexibility, skills, and correct organic and mental habits that are stored in the subconscious as a result of daily exercise.Among the most important books on piano technique John Thompson, Longo, Bartok."
-                            )}
-                        </motion.p>
-                    </div>
-                    <div className="h-[400px]">
-                        <motion.img
-                            initial={{ x: 300, opacity: 0, scale: 1 }}
-                            transition={{ duration: 1, type: "spring" }}
-                            whileHover={{ scale: 1.05 }}
-                            whileInView={{ x: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            className="h-full w-full object-contain mx-auto"
-                            src="./images/material.png"
-                            alt=""
-                        />
-                    </div>
-                </div>
-            </section>
             <div className="container">
-                <div className="box-out">
-                    <div
-                        key="piano_info"
-                        style={{
-                            backgroundImage: `url("images/piano_info.jpg")`,
-                        }}
+                <Header
+                    title={t("المواد الدراسية", "Study Material")}
+                    desc={t(
+                        <>
+                            اكتشف طريق النجاح <br />
+                            واستكشف موادنا الدراسية.
+                        </>,
+                        <>
+                            Unlock the Keys to Success <br />
+                            Dive into Our Study Material
+                        </>
+                    )}
+                    imgSlug="material"
+                />
+                <div className="grid md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-8">
+                    <BookCardBase
+                        name="Piano Info"
+                        cover="images/piano_info.jpg"
                         onClick={() => Inertia.get("articles")}
-                        className="book books-1"
-                    ></div>
+                    />
                     {books.map((book) => (
-                        <div
-                            key={book.id}
-                            onClick={() => goToBook(book)}
-                            style={{
-                                backgroundImage: `url("${book.cover}")`,
-                            }}
-                            className="book books-1"
-                        ></div>
+                        <BookCard key={book.id} book={book} />
                     ))}
                 </div>
             </div>
-            {/* <div className="move-sections-container ltr">
-                <section
-                    className={`container moving-section screen-1 ${
-                        screen === Screen.Books ? "current" : ""
-                    }`}
-                >
-                    <div className="box-out">
-                        <div
-                            key="piano_info"
-                            style={{
-                                backgroundImage: `url("images/piano_info.jpg")`,
-                            }}
-                            onClick={() => Inertia.get("articles")}
-                            className="book books-1"
-                        ></div>
-                        {books.map((book) => (
-                            <div
-                                key={book.id}
-                                onClick={() => toVideos(book)}
-                                style={{
-                                    backgroundImage: `url("${book.cover}")`,
-                                }}
-                                className="book books-1"
-                            ></div>
-                        ))}
-                    </div>
-                </section>
-                <section
-                    className={`container my-8 moving-section screen-2 ${
-                        screen === Screen.Videos ? "current" : ""
-                    }`}
-                >
-                    {currentBook ? (
-                        <VideosScreen videos={currentBook.videos} />
-                    ) : (
-                        ""
-                    )}
-                    <a
-                        className="btn block my-4 mx-auto w-fit hover:text-white"
-                        href={currentBook?.pdf}
-                        target="_blank"
-                    >
-                        Download PDF
-                    </a>
-                    <button
-                        onClick={toBooks}
-                        className="btn block my-4 mx-auto"
-                    >
-                        Back to books
-                    </button>
-                </section>
-            </div> */}
             <section className="m-10"></section>
         </>
     );

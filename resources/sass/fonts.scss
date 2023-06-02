@@ -34,6 +34,22 @@
 
 
 @font-face {
+    src: url("../fonts/Poppins-Regular.ttf");
+    font-family: "Poppins";
+    font-weight: normal;
+}
+@font-face {
+    src: url("../fonts/Poppins-Medium.ttf");
+    font-family: "Poppins";
+    font-weight: medium;
+}
+@font-face {
+    src: url("../fonts/Poppins-Bold.ttf");
+    font-family: "Poppins";
+    font-weight: bold;
+}
+
+@font-face {
     src: url("../fonts/ZenMaruGothic-Bold.ttf");
     font-family: "ZenMaruGothic";
     font-weight: bold;

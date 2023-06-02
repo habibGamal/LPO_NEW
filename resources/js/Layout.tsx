@@ -19,7 +19,7 @@ const ToTopBtn = ({
 );
 
 const Footer = () => (
-    <footer className="bg-[#DADADA] text-[#545454] p-4 text-center">
+    <footer className="bg-[#DADADA] text-[#545454] p-4 text-center mt-24">
         All Copyrights &copy; reserved for Dr. Maha Ahmed Qassem & Eng. Habib
         Gamal {new Date().getFullYear()}
     </footer>

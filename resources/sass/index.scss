@@ -165,7 +165,11 @@ ol {
         height: 100%;
         position: relative;
         left: 8px;
-        background: linear-gradient(-180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+        background: linear-gradient(
+            -180deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0) 60%
+        );
     }
 
     .book:hover::before {
@@ -319,9 +323,21 @@ input[type="file"] {
     aspect-ratio: 1/1;
     background-size: 100%;
     background-repeat: no-repeat;
-    transform: rotate(45deg) translate(-50%,10%);
+    transform: rotate(45deg) translate(-50%, 10%);
 }
 
 [lang="ar"] .dots::before {
-    transform: rotate(45deg) translate(10%,-50%);
+    transform: rotate(45deg) translate(10%, -50%);
+}
+
+.rotate-icon svg {
+    transition: transform 0.5s ease-in-out;
+}
+
+.rotate-icon:hover svg {
+    transform: rotate(360deg);
+}
+
+[lang="ar"] .custom-modal .ant-modal-body {
+    direction: rtl;
 }
