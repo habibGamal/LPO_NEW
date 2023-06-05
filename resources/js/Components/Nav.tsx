@@ -87,13 +87,13 @@ const Nav = () => {
             />
             <NavLinkAction
                 divider
-                href="/contact"
-                content={t("تواصل معنا", "Contact")}
+                href="/assets"
+                content={t("صور وفيديوهات", "Images & Videos")}
             />
             <NavLinkAction
                 divider
-                href="/assets"
-                content={t("صور وفيديوهات", "Images & Videos")}
+                href="/contact"
+                content={t("تواصل معنا", "Contact")}
             />
         </>
     );
@@ -107,12 +107,12 @@ const Nav = () => {
                 content={t("عن البرنامج", "About Program")}
             />
             <NavLinkAction
-                href="/contact"
-                content={t("تواصل معنا", "Contact")}
-            />
-            <NavLinkAction
                 href="/assets"
                 content={t("صور وفيديوهات", "Images & Videos")}
+            />
+            <NavLinkAction
+                href="/contact"
+                content={t("تواصل معنا", "Contact")}
             />
         </ul>
     );
