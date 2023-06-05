@@ -92,8 +92,8 @@ const Nav = () => {
             />
             <NavLinkAction
                 divider
-                href="/feedback"
-                content={t("انطباعك", "Feedback")}
+                href="/assets"
+                content={t("صور وفيديوهات", "Images & Videos")}
             />
         </>
     );
@@ -111,8 +111,8 @@ const Nav = () => {
                 content={t("تواصل معنا", "Contact")}
             />
             <NavLinkAction
-                href="/feedback"
-                content={t("انطباعك", "Feedback")}
+                href="/assets"
+                content={t("صور وفيديوهات", "Images & Videos")}
             />
         </ul>
     );
@@ -162,10 +162,11 @@ const Nav = () => {
                 {largeScreen && <DesktopLinks />}
                 <ul className={navClassName}>
                     {!largeScreen && <PrimaryLinks />}
+
                     <NavLinkAction
                         divider
-                        href="/assets"
-                        content={t("صور وفيديوهات", "Images & Videos")}
+                        href="/feedback"
+                        content={t("انطباعك", "Feedback")}
                     />
                     <Auth>
                         <NavLinkAction
