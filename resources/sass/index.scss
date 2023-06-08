@@ -316,10 +316,10 @@ input[type="file"] {
     @apply relative;
 }
 .dots::before {
+    @apply w-[50px] md:w-[75px];
     content: "";
     position: absolute;
     background-image: url("./imgs/dots.png");
-    width: 75px;
     aspect-ratio: 1/1;
     background-size: 100%;
     background-repeat: no-repeat;

@@ -31,14 +31,19 @@ export default function About() {
             <Journal />
 
             <SectionTitle
+                className="mt-28"
                 title={t("تحت إشراف كلاً من", "Under the supervision of")}
             />
             <Supervisors />
 
-            <SectionTitle title={t("محتويات الموقع", "Site contents")} />
+            <SectionTitle
+                className="mt-28"
+                title={t("محتويات الموقع", "Site contents")}
+            />
             <SiteContents />
 
             <SectionTitle
+                className="mt-28"
                 title={t(
                     "نواتج التعلم المستهدفة من الموقع",
                     "Site's Targeted Learning Outcomes"
@@ -54,7 +59,7 @@ const Journal = () => {
     const [modalState, open, close] = useModal();
     return (
         <div className="grid lg:grid-cols-2 items-center rounded-3xl bg-pink-500 my-16">
-            <div className="bg-white rounded-3xl">
+            <div className="order-2 lg:order-1 bg-white rounded-3xl">
                 <img
                     className="w-full rounded-3xl object-[50%8%] max-h-[300px] object-cover"
                     src="images/dr_maha.jpg"
@@ -63,14 +68,14 @@ const Journal = () => {
                     <ul className="md:text-xl space-y-2 mb-8 list-disc text-[#505050]">
                         <li>
                             {t(
-                                "محاضر مساعد في قسم التعليم الموسيقي بكلية التربية النوعية في جامعة أسيوط.",
+                                "محاضر مساعد في قسم التربية الموسيقية بكلية التربية النوعية في جامعة أسيوط.",
                                 "Assistant Lecturer at the Department of Musical Education in the Faculty of Specific Education at Assiut University."
                             )}
                         </li>
                         <li>
                             {t(
-                                "تم تدريبه وقيادة فريق الموسيقى في الكلية.",
-                                "Trained and led the college's musical team."
+                                "قامة بتدريب وقيادة فريق الموسيقى في الكلية.",
+                                "Train and led the college's musical team."
                             )}
                         </li>
                         <li>
@@ -90,7 +95,6 @@ const Journal = () => {
                         title={null}
                         open={modalState.isOpen}
                         onCancel={close}
-                        closable={false}
                         footer={null}
                         className="custom-modal"
                     >
@@ -102,14 +106,26 @@ const Journal = () => {
                             <ul className="md:text-lg space-y-2 mb-8 list-disc text-[#505050]">
                                 <li>
                                     {t(
-                                        "محاضر مساعد في قسم التعليم الموسيقي بكلية التربية النوعية في جامعة أسيوط.",
+                                        "محاضر مساعد في قسم التربية الموسيقية بكلية التربية النوعية في جامعة أسيوط.",
                                         "Assistant Lecturer at the Department of Musical Education in the Faculty of Specific Education at Assiut University."
                                     )}
                                 </li>
                                 <li>
                                     {t(
-                                        "تم تدريبه وقيادة فريق الموسيقى في الكلية.",
-                                        "Trained and led the college's musical team."
+                                        "عضو اللجنه العليا للانشطة بجامعة أسيوط",
+                                        "Member of the Supreme Committee for Activities at Assiut University"
+                                    )}
+                                </li>
+                                <li>
+                                    {t(
+                                        "عضو في وحدة التقويم والقياس بكلية التربية النوعية جامعة أسيوط",
+                                        "Member of the Evaluation and Measurement Unit at the Faculty of Specific Education, Assiut University"
+                                    )}
+                                </li>
+                                <li>
+                                    {t(
+                                        "قامة بتدريب وقيادة فريق الموسيقى في الكلية.",
+                                        "Train and led the college's musical team."
                                     )}
                                 </li>
                                 <li>
@@ -121,13 +137,13 @@ const Journal = () => {
 
                                 <li>
                                     {t(
-                                        'شاركت كعضو في لجنة التحكيم في البرنامج الوطني للحاضنات التكنولوجية المتخصصة "إنطلاق" في حاضنة هيما',
+                                        'شاركت كعضو في لجنة التحكيم في البرنامج الوطني للحاضنات التكنولوجية المتخصصة "إنطلاق" في حاضنة همه',
                                         'Participated as a member of the arbitration committee in the national program for specialized technology incubators "Intilaq" at the Hemma incubator.'
                                     )}
                                 </li>
                                 <li>
                                     {t(
-                                        "شاركت كعضو في لجنة التحكيم في برنامج إينوميجيبت في حاضنة هيما الشركية في جامعة أسيوط",
+                                        "شاركت كعضو في لجنة التحكيم في برنامج ينو ايجيبت في الحاضنة التكنولوجية همه بجامعة أسيوط",
                                         "Participated as a member of the judging committee in the InoEgypt program at the Hemma corporate incubator at Assiut University."
                                     )}
                                 </li>
@@ -136,7 +152,7 @@ const Journal = () => {
                     </Modal>
                 </div>
             </div>
-            <div className="p-8 md:p-16">
+            <div className="order-1 p-8 md:p-16">
                 <p className="text-lg md:text-2xl 2xl:text-3xl text-[#FFF3F3] leading-relaxed md:!leading-loose">
                     {t(
                         `
@@ -185,13 +201,12 @@ const Card = ({
                 onClick={open}
                 className="border-b border-pink-500 hover:border-blueblack-500 text-xl text-pink-500 hover:text-blueblack-500 font-medium mx-auto block"
             >
-                {t('المزيد','More')}
+                {t("المزيد", "More")}
             </button>
             <Modal
                 title={null}
                 open={modalState.isOpen}
                 onCancel={close}
-                closable={false}
                 footer={null}
                 className="custom-modal"
             >
@@ -352,7 +367,7 @@ const TargetSections = () => {
 const Supervisors = () => {
     const t = useTranslate();
     return (
-        <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-8 my-32">
+        <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-8 my-20">
             <Card
                 imgSrc="images/dr_ali.jpg"
                 name={t("أ.د/ علي حسين النجار", "Prof. Ali Hussein Al-Najjar")}
@@ -362,17 +377,17 @@ const Supervisors = () => {
                         "Position: Professor of performance (piano) in the Department of Music Education at the Faculty of Specific Education, Ain Shams University."
                     ),
                     t(
-                        "المدير السابق: تولى منصب مدير مركز الفنون الأسبق بكلية التربية النوعية، جامعة عين شمس.",
+                        "المنصب السابق: تولى منصب مدير مركز الفنون الأسبق بكلية التربية النوعية، جامعة عين شمس.",
                         "Former Director: Served as Director of the Art Center at the Faculty of Specific Education, Ain Shams University."
                     ),
                 ]}
                 completeList={[
                     t(
-                        "المنصب: أستاذ في أداء البيانو في قسم تعليم الموسيقى بجامعة عين شمس.",
+                        "المنصب: أستاذ في أداء البيانو في قسم التربية الموسيقية بجامعة عين شمس.",
                         "Position: Professor of Performance (Piano) in the Department of Music Education at Ain Shams University."
                     ),
                     t(
-                        "المدير السابق: شغل منصب مدير المركز الفني في كلية التربية الخاصة بجامعة عين شمس.",
+                        "المنصب السابق: شغل منصب مدير المركز الفني في كلية التربية النوعية بجامعة عين شمس.",
                         "Former Director: Served as the Director of the Art Center at the Faculty of Specific Education, Ain Shams University."
                     ),
                     t(
@@ -388,7 +403,7 @@ const Supervisors = () => {
                         "Concert Participation: Acted as a maestro and pianist in various concerts held at the Egyptian Opera House."
                     ),
                     t(
-                        "عضوية في لجنة المحكمين: عضو في اللجنة المسؤولة عن فحص الإنتاج العلمي لوظائف الأساتذة والمدرسين المساعدين في قطاع تعليم الموسيقى.",
+                        "عضو في لجنة المحكمين: عضو في اللجنة المسؤولة عن فحص الإنتاج العلمي لوظائف الأساتذة والمدرسين المساعدين في قطاع تعليم الموسيقى.",
                         "Committee Membership: Member of the arbitrators committee responsible for examining scientific production for the positions of professors and assistant professors in the Music Education Sector."
                     ),
                 ]}
@@ -406,17 +421,17 @@ const Supervisors = () => {
                         "Position: Professor of Theories and Composition in the Department of Music Education at the Faculty of Specific Education, Assiut University."
                     ),
                     t(
-                        "المدير السابق: تولى منصب نائب عميد كلية التربية النوعية لشئون التعليم والطلاب، جامعة أسيوط.",
+                        "المنصب السابق: تولى منصب نائب عميد كلية التربية النوعية لشئون التعليم والطلاب، جامعة أسيوط.",
                         "Former Director: Served as Vice Dean of the Faculty of Specific Education for Education and Student Affairs, Assiut University."
                     ),
                 ]}
                 completeList={[
                     t(
-                        "المنصب: أستاذ في النظريات والتأليف في قسم تعليم الموسيقى بجامعة أسيوط.",
+                        "المنصب: أستاذ في النظريات والتأليف في قسم التربية الموسيقية بجامعة أسيوط.",
                         "Position: Professor of Theories and Composition in the Department of Musical Education at Assiut University."
                     ),
                     t(
-                        "نائب العميد: يتولى منصب نائب العميد لشؤون التعليم والطلاب في كلية التربية الخاصة بجامعة أسيوط.",
+                        "المنصب السابق:تولت منصب نائب العميد لشؤون التعليم والطلاب في كلية التربية النوعية بجامعة أسيوط.",
                         "Vice Dean: Holds the position of Vice Dean of the Faculty of Specific Education for Education and Student Affairs at Assiut University."
                     ),
                     t(
@@ -424,15 +439,15 @@ const Supervisors = () => {
                         "Supervision: Actively involved in supervising numerous master's and doctoral dissertations in the field of music education."
                     ),
                     t(
-                        "المنشورات: له العديد من المنشورات في مجال النظريات والتأليف.",
+                        "المنشورات: لها العديد من المنشورات في مجال النظريات والتأليف.",
                         "Publications: Has authored multiple publications in the area of theories and composition."
                     ),
                     t(
-                        "عضوية في اللجنة العليا للأنشطة الطلابية.",
+                        "عضو في اللجنة العليا للأنشطة الطلابية بجامعة أسيوط.",
                         "Committee Membership: Member of the Higher Committee for Student Activities."
                     ),
                     t(
-                        "عضوية في لجنة المحكمين المسؤولة عن فحص الإنتاج العلمي لوظائف الأساتذة والمدرسين المساعدين في قطاع تعليم الموسيقى.",
+                        "عضو في لجنة المحكمين المسؤولة عن فحص الإنتاج العلمي لوظائف الأساتذة والمدرسين المساعدين في قطاع تعليم الموسيقى.",
                         "Committee Membership: Member of the Arbitrators Committee responsible for examining scientific production for the positions of professors and assistant professors in the Music Education Sector."
                     ),
                 ]}
@@ -446,35 +461,35 @@ const Supervisors = () => {
                         "Position: Lecturer in the Department of Educational Technology at the Faculty of Specific Education, Assiut University."
                     ),
                     t(
-                        "المدير السابق: تولى منصب نائب مدير وحدة ضمان الجودة بكلية التربية النوعية، جامعة أسيوط.",
+                        "المنصب السابق: تولى منصب نائب مدير وحدة ضمان الجودة بكلية التربية النوعية، جامعة أسيوط.",
                         "Former Director: Served as Deputy Director of the Quality Assurance Unit at the Faculty of Specific Education, Assiut University."
                     ),
                 ]}
                 delay={0.4}
                 completeList={[
                     t(
-                        "المنصب: محاضر في قسم التكنولوجيا التعليمية بكلية التربية الخاصة بجامعة أسيوط.",
-                        "Position: Lecturer in the Department of Educational Technology at Assiut University's Faculty of Specific Education.",
+                        "المنصب: محاضر في قسم التكنولوجيا التعليمية بكلية التربية النوعية بجامعة أسيوط.",
+                        "Position: Lecturer in the Department of Educational Technology at Assiut University's Faculty of Specific Education."
                     ),
                     t(
-                        "نائب المدير: يشغل منصب نائب مدير وحدة ضمان الجودة في كلية التربية الخاصة.",
-                        "Deputy Director: Holds the role of Deputy Director of the Quality Assurance Unit at the Faculty of Specific Education.",
+                        "نائب المدير: يشغل منصب نائب مدير وحدة ضمان الجودة في كلية التربية النوعية.",
+                        "Deputy Director: Holds the role of Deputy Director of the Quality Assurance Unit at the Faculty of Specific Education."
                     ),
                     t(
-                        "المشرف: يشرف على وحدة التقويم والقياس في كلية التربية الخاصة.",
-                        "Supervisor: Oversees the Evaluation and Measurement Unit at the Faculty of Specific Education.",
+                        "المشرف: يشرف على وحدة التقويم والقياس في كلية التربية النوعية.",
+                        "Supervisor: Oversees the Evaluation and Measurement Unit at the Faculty of Specific Education."
                     ),
                     t(
-                        "عضوية في لجنة إعداد الدورات الإلكترونية لدرجة البكالوريوس.",
-                        "Committee Membership: Member of the Committee for Preparing Electronic Courses for the Bachelor's Degree.",
+                        "عضو في لجنة إعداد الدورات الإلكترونية لدرجة البكالوريوس.",
+                        "Committee Membership: Member of the Committee for Preparing Electronic Courses for the Bachelor's Degree."
                     ),
                     t(
                         "الإشراف: مشاركة فعالة في إشراف العديد من رسائل الماجستير والدكتوراه.",
-                        "Supervision: Actively involved in supervising numerous master's and doctoral dissertations.",
+                        "Supervision: Actively involved in supervising numerous master's and doctoral dissertations."
                     ),
                     t(
                         "المنشورات: له العديد من المنشورات في مجال التكنولوجيا التعليمية والحواسيب.",
-                        "Publications: Has authored multiple publications in the field of educational technology and computers.",
+                        "Publications: Has authored multiple publications in the field of educational technology and computers."
                     ),
                 ]}
             />
@@ -485,7 +500,7 @@ const Supervisors = () => {
 const SiteContents = () => {
     const t = useTranslate();
     return (
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-8 my-20">
             <SiteContentItem
                 title={t(
                     "تمارين تمهيدية للاصابع علي لوحة المفاتيح والجلسة الصحيحة من كتاب john Thomson",

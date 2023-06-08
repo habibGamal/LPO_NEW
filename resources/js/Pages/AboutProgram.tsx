@@ -39,13 +39,13 @@ export default function AboutProgram() {
                 />
             </div>
 
-            <div className="grid lg:grid-cols-2 items-center rounded-3xl bg-pink-500 my-16">
+            <div className="grid  lg:grid-cols-2 items-center rounded-3xl bg-pink-500 my-16">
                 <img
-                    className="w-full rounded-3xl object-[50%8%] max-h-[620px] object-cover"
+                    className="order-2 lg:order-1 w-full rounded-3xl object-[50%8%] max-h-[620px] object-cover"
                     src="images/dr_maha.jpg"
                 />
 
-                <div className="p-8 md:p-16">
+                <div className="order-1 p-8 md:p-16">
                     <p className="text-lg md:text-2xl 2xl:text-3xl text-[#FFF3F3] leading-relaxed md:!leading-loose">
                         {t(
                             `
@@ -60,7 +60,7 @@ export default function AboutProgram() {
             </div>
 
             <SectionTitle
-                className="mt-24"
+                className="mt-28"
                 title={t("تحت إشراف كلاً من", "Under the supervision of")}
             />
             <ul className="m-6 flex flex-col gap-4">
@@ -97,7 +97,7 @@ export default function AboutProgram() {
             </ul>
 
             <SectionTitle
-                className="mt-24"
+                className="mt-28"
                 title={t("الفريق القائم على عمل البرنامج", "Team Work")}
             />
             <ul className="m-6 flex flex-col gap-4">
