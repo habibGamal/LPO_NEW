@@ -74,7 +74,7 @@ const Journal = () => {
                         </li>
                         <li>
                             {t(
-                                "قامة بتدريب وقيادة فريق الموسيقى في الكلية.",
+                                "قامت بتدريب وقيادة فريق الموسيقى في الكلية.",
                                 "Train and led the college's musical team."
                             )}
                         </li>
@@ -124,7 +124,7 @@ const Journal = () => {
                                 </li>
                                 <li>
                                     {t(
-                                        "قامة بتدريب وقيادة فريق الموسيقى في الكلية.",
+                                        "قامت بتدريب وقيادة فريق الموسيقى في الكلية.",
                                         "Train and led the college's musical team."
                                     )}
                                 </li>
