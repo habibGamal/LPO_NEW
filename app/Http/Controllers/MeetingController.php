@@ -25,7 +25,7 @@ class MeetingController extends Controller
         if ($category === 'preivous')
             return Inertia::render('Meetings/Index', ['meetingsDB' => Meeting::whereIn('state', ['ended'])->orderBy('date')->get()]);
         if ($category === 'history')
-            return Inertia::render('Meetings/History', ['meetingsDB' => Meeting::select(['id', 'name', 'date', 'state'])->where('state', '!=', 'offline')->orderBy('date')->get()]);
+            return Inertia::render('Meetings/History', ['meetingsDB' => Meeting::select(['id', 'name', 'date', 'state'])->orderBy('date')->get()]);
         if ($category === 'offline')
             return Inertia::render('Meetings/Index', ['meetingsDB' => Meeting::where('state', 'offline')->orderBy('date')->get()]);
         return back();
