@@ -163,11 +163,6 @@ const Nav = () => {
                 <ul className={navClassName}>
                     {!largeScreen && <PrimaryLinks />}
 
-                    <NavLinkAction
-                        divider
-                        href="/feedback"
-                        content={t("انطباعك", "Feedback")}
-                    />
                     <Auth>
                         <NavLinkAction
                             divider
@@ -195,6 +190,12 @@ const Nav = () => {
                             content={t("لوحة التحكم", "Dashboard")}
                         />
                     </Admin>
+
+                    <NavLinkAction
+                        divider
+                        href="/feedback"
+                        content={t("انطباعك", "Feedback")}
+                    />
                     <SemiAuth>
                         <NavLinkAction
                             divider

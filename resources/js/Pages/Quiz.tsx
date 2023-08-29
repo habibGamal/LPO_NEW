@@ -8,7 +8,7 @@ export default function Quiz() {
     return (
         <section className="bg-x-blue lg:py-16 py-4 text-white text-center">
             <div className="container max-w-[780px]">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl text-white font-bold uppercase mb-4">{t('نمازج امتحانات', 'Quiz Samples')}</h2>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl text-white font-bold uppercase mb-4">{t('نماذج امتحانات', 'Quiz Samples')}</h2>
                 <p className="mb-8 text-xl">
                     {t(
                         'تعدّ الاختبارات وسيلة من الوسائل المهمّة المستخدمة في قياس وتقويم قدرات الطلاب، ومعرفة ما وصّل إليه مستواهم التحصيلي، ومن ناحية أخرى تساعد في معرفة مدى تحقق الأهداف السلوكية، أوالنواتج التعليميّة المطلوبة، وما يقوم به المعلم من نشاطات تعليمية، كمّا تساعد على رفع المستويات التحصيلية عند الطلاب، لهذا من الضروري أن تتّصف هذه الاختبارات بالكفاءة العالية في عملية القياس والتقويم، ويمكن الوصول لهذه الكفاءة، عن طريق إعداد اختبارات نموذجيّة، وصحيحة.',
