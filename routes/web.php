@@ -5,6 +5,7 @@ use App\Http\Controllers\AssetsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\MapMeetingsToStudentsController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\StudentController;
 use App\Mail\Feedback;
@@ -51,6 +52,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/assets/insert-images', [AssetsController::class, 'insertImages']);
     Route::post('/assets/edit-images', [AssetsController::class, 'editImages']);
     Route::post('/assets/remove-image', [AssetsController::class, 'removeImage']);
+    // meetings mapping to students
+    Route::get('/editable-students-table', [MapMeetingsToStudentsController::class, 'editableStudentsTable']);
+    Route::post('/update-student-show-meetings', [MapMeetingsToStudentsController::class, 'updateStudentShowMeetings']);
+    Route::get('/edit-student-meetings/{student}', [MapMeetingsToStudentsController::class, 'editStudentMeetings']);
+    Route::post('/update-student-meetings', [MapMeetingsToStudentsController::class, 'updateStudentMeetings']);
     // Route::get('/display-scores', function () {
     //     return Inertia::render('DisplayScores', [
     //         'scores' => Exam::orderByDesc('id')->get(),
@@ -75,7 +81,10 @@ Route::middleware(['auth','activated'])->group(function () {
     });
     Route::get('/meetings/categories/{category}', [MeetingController::class, 'index'])->name('meetings.index');
     Route::get('/meetings/{meeting}', [MeetingController::class, 'show'])->name('meetings.show');
-
+    // meetings mapping to students
+    Route::get('/students-table', [MapMeetingsToStudentsController::class, 'showStudentsTable']);
+    Route::get('/student-meetings/{student}', [MapMeetingsToStudentsController::class, 'showStudentMeetings']);
+    Route::get('/show-meeting',[MapMeetingsToStudentsController::class,'showMeeting']);
 
 
     Route::prefix('/quiz')->group(function () {
@@ -98,8 +107,8 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/about', function () {
-    return Inertia::render('About');
+Route::get('/program-management', function () {
+    return Inertia::render('ProgramManagement');
 });
 Route::get('/images_show', function () {
     return Inertia::render('Images');

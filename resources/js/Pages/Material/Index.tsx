@@ -47,6 +47,7 @@ const BookCard = ({ book }: { book: Book }) => {
             ? Inertia.get(`books/${book.id}`)
             : window.open(book.pdf, "_blank");
     };
+    console.log(book.id);
     return (
         <BookCardBase name={book.name} cover={book.cover} onClick={goToBook} />
     );
@@ -59,15 +60,15 @@ export default function Index({ booksDB }: { booksDB: BookDB[] }) {
         <>
             <div className="container">
                 <Header
-                    title={t("المواد الدراسية", "Study Material")}
+                    title={t("طرق عزفية", "Methods")}
                     desc={t(
                         <>
                             اكتشف طريق النجاح <br />
-                            واستكشف موادنا الدراسية.
+                            واستكشف الطرق العزفية.
                         </>,
                         <>
                             Unlock the Keys to Success <br />
-                            Dive into Our Study Material
+                            Dive into Our Methods
                         </>
                     )}
                     imgSlug="material"

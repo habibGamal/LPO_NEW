@@ -13,14 +13,14 @@ export default function Dashboard() {
                 <Link href="/meetings/create">
                     <DashboardCard imgSrc="./images/meeting.jpg" title="Manage Meetings" />
                 </Link>
-                {/* <Link href="/display-scores">
-                    <DashboardCard imgSrc="./images/quiz.png" title="Exam Scores" />
-                </Link> */}
                 <Link href="/articles/create">
                     <DashboardCard imgSrc="./images/articles.png" title="Manage Articles" />
                 </Link>
                 <Link href="/list-students">
                     <DashboardCard imgSrc="./images/students.png" title="Manage Students" />
+                </Link>
+                <Link href="/editable-students-table">
+                    <DashboardCard imgSrc="./images/students.png" title="Assign Meetings To Students" />
                 </Link>
             </div>
         </div>

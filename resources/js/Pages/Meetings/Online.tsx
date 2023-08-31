@@ -29,10 +29,22 @@ export default function Online() {
                     }
                     btnText={t("استكشف", "Explore")}
                     onClick={() => {
-                        // /meetings/online-or-offline
-                        Inertia.get('/meetings/online-or-offline')
+                        // Inertia.get('/meetings/online-or-offline')
+                        Inertia.get('/students-table')
                     }}
                     key={2}
+                />
+                <Choice
+                    imgSrc='/images/previous.png'
+                    title={t('السابق قديم', 'OLD Previous')}
+                    desc={
+                        t("استعيد لحظات موسيقية ساحرة!", "Revisit Captivating Moments of Music!")
+                    }
+                    btnText={t("استكشف", "Explore")}
+                    onClick={() => {
+                        Inertia.get('/meetings/online-or-offline')
+                    }}
+                    key={4}
                 />
                 <Choice
                     imgSrc='/images/history.png'

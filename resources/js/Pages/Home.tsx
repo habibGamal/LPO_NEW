@@ -51,16 +51,8 @@ export default function Home() {
                                 className="uppercase text-5xl text-white font-bold mb-12 leading-tight lg:text-6xl "
                             >
                                 learning <br />{" "}
-                                <span className="text-main">piano online</span>{" "}
-                                <br /> education system
+                                <span className="text-main">piano online</span>
                             </motion.p>
-                            <motion.button
-                                {...up(0.5)}
-                                className="btn"
-                                onClick={() => Inertia.get("/about")}
-                            >
-                                Go
-                            </motion.button>
                         </div>
                     </div>
                 </div>

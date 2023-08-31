@@ -79,11 +79,15 @@ const Nav = () => {
     const PrimaryLinks = () => (
         <>
             <NavLinkAction divider href="/" content={t("الرئيسية", "Home")} />
-            <NavLinkAction divider href="/about" content={t("عنا", "About")} />
+            <NavLinkAction
+                divider
+                href="/program-management"
+                content={t("ادارة الموقع", "Website Management")}
+            />
             <NavLinkAction
                 divider
                 href="/about-program"
-                content={t("عن البرنامج", "About Program")}
+                content={t("عن الموقع واهدافه", "About Program")}
             />
             <NavLinkAction
                 divider
@@ -101,10 +105,13 @@ const Nav = () => {
     const DesktopLinks = () => (
         <ul className="flex items-center gap-8">
             <NavLinkAction href="/" content={t("الرئيسية", "Home")} />
-            <NavLinkAction href="/about" content={t("عنا", "About")} />
+            <NavLinkAction
+                href="/program-management"
+                content={t("ادارة الموقع", "Website Management")}
+            />
             <NavLinkAction
                 href="/about-program"
-                content={t("عن البرنامج", "About Program")}
+                content={t("عن الموقع واهدافه", "About Website and Goals")}
             />
             <NavLinkAction
                 href="/assets"
@@ -167,7 +174,7 @@ const Nav = () => {
                         <NavLinkAction
                             divider
                             href="/books"
-                            content={t("المواد", "Material")}
+                            content={t("الطرق العزفية", "Methods")}
                         />
                         {/* <NavLink onClick={hideNav} href="/articles" name={t('معلومات عن البيانو', 'Piano Info')} /> */}
                         <NavLinkAction
@@ -194,7 +201,7 @@ const Nav = () => {
                     <NavLinkAction
                         divider
                         href="/feedback"
-                        content={t("انطباعك", "Feedback")}
+                        content={t("تقييم الدارس", "Feedback")}
                     />
                     <SemiAuth>
                         <NavLinkAction

@@ -26,10 +26,9 @@ export default function Index({ bookDB }: { bookDB: BookDB }) {
                             viewport={{ once: true }}
                             className="text-3xl md:text-4xl lg:text-5xl mb-4 lg:mb-8  font-bold uppercase"
                         >
-                            {t("مواد", "Study")} <br />{" "}
+                            {t("طرق", "")} <br />{" "}
                             <span className="highlight-header">
-                                {" "}
-                                {t("الدراسة", "material")}
+                                {t("عزفية", "Methods")}
                             </span>
                         </motion.h3>
                         <motion.p
@@ -44,9 +43,11 @@ export default function Index({ bookDB }: { bookDB: BookDB }) {
                             className="text-xl font-[500]"
                         >
                             {t(
-                                "تكنيك البيانو. (Piano Technique). هو عباره عن تمارين رياضيه لالصابع يؤديها الدارس علي البيانو كل يوم بعقل واعي. وتركيز تام ألكتسابالمرونه والمهارات والعادات العضويه والذهنيه الصحيحة التي تخزن في اللاشعور نتيجة للتمرين اليومي ومن أهم كتب تكنيك البيانو جون طومسون، لونجو، بارتوك.",
-                                "piano technique. (Piano Technique). It is a finger exercise that the student performs on the piano every day with a conscious mind. And complete focus to acquire flexibility, skills, and correct organic and mental habits that are stored in the subconscious as a result of daily exercise.Among the most important books on piano technique John Thompson, Longo, Bartok."
+                                "من أهم الطرق العزفية",
+                                "Among the most important methods"
                             )}
+                            {" "}
+                            {book.name}
                         </motion.p>
                     </div>
                     <div className="h-[400px]">
