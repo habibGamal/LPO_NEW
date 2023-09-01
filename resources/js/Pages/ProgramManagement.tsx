@@ -99,7 +99,7 @@ const Journal = () => {
                 onClick={open}
                 className="mx-auto block md:py-4 py-2 px-6 text-lg rounded-2xl bg-blueblack-500 hover:bg-blueblack-600 font-medium text-white"
             >
-                More
+                {t("المزيد","More")}
             </button>
             <Modal
                 title={null}

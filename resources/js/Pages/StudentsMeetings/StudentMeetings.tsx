@@ -102,7 +102,7 @@ const columns: ColumnsType<CompositeMeetingStudent> = [
                     {t("جلسات", "Meetings of")} {student.firstName}{" "}
                     {student.secondName}
                 </h2>
-                <Table pagination={false} columns={columns} dataSource={data} />
+                <Table className="overflow-x-auto" pagination={false} columns={columns} dataSource={data} />
             </div>
         </div>
     );
