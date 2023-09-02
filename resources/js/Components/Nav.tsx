@@ -97,7 +97,7 @@ const Nav = () => {
             <NavLinkAction
                 divider
                 href="/contact"
-                content={t("تواصل معنا", "Contact")}
+                content={t("تواصل معنا", "Contact us")}
             />
         </>
     );
@@ -119,7 +119,7 @@ const Nav = () => {
             />
             <NavLinkAction
                 href="/contact"
-                content={t("تواصل معنا", "Contact")}
+                content={t("تواصل معنا", "Contact us")}
             />
         </ul>
     );

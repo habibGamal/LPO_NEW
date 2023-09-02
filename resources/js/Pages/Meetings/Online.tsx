@@ -34,7 +34,7 @@ export default function Online() {
                     }}
                     key={2}
                 />
-                <Choice
+                {/* <Choice
                     imgSrc='/images/previous.png'
                     title={t('السابق قديم', 'OLD Previous')}
                     desc={
@@ -45,7 +45,7 @@ export default function Online() {
                         Inertia.get('/meetings/online-or-offline')
                     }}
                     key={4}
-                />
+                /> */}
                 <Choice
                     imgSrc='/images/history.png'
                     title={t('السجل', 'History')}

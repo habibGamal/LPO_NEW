@@ -18,7 +18,7 @@ export default function Quiz() {
                 <img src="/images/quiz.png" alt="" />
                 <div className="flex flex-col gap-4 text-left mt-8">
                     <QuizComponent name={t('امتحن الان', 'Go To Exam')} onClick={() => Inertia.get('/quiz/pre-exam')} />
-                    {/* <QuizComponent name={t('الامتحان البعدي', 'Post-exam')} onClick={() => Inertia.get('/quiz/post-exam')} /> */}
+                    <QuizComponent name={t('امتحان ثاني', 'Second Exam')} onClick={() => Inertia.get('/quiz/paper-exam')} />
                 </div>
             </div>
         </section>

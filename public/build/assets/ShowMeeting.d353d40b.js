@@ -1,1 +1,0 @@
-import{a as e}from"./app.be9c2860.js";const t=a=>e("div",{className:"container",children:e("div",{className:"mt-4 mx-auto book-video-iframe ",dangerouslySetInnerHTML:{__html:a.embededLink}})});export{t as default};

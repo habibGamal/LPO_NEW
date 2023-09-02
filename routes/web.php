@@ -92,7 +92,9 @@ Route::middleware(['auth','activated'])->group(function () {
             return Inertia::render('Quiz');
         });
         Route::get('/pre-exam', [ExamController::class,'goToExam']);
-
+        Route::get('/paper-exam', function () {
+            return Inertia::render('QuizSamples/PaperExam');
+        });
         Route::get('/post-exam', function () {
             return Inertia::render('QuizSamples/Exam', ['examType' => 'post']);
         });
