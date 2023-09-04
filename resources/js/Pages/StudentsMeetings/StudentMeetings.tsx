@@ -51,49 +51,49 @@ export default function StudentMeetings({
     );
     const t = useTranslate();
 
-const columns: ColumnsType<CompositeMeetingStudent> = [
-    {
-        title: t("الاسم", "Name"),
-        dataIndex: ["meeting", "name"],
-    },
-
-    {
-        title: t("الحالة", "State"),
-        dataIndex: ["meeting", "state"],
-        render: (state) => {
-            if (state === "offline") return <Tag>Offline</Tag>;
-            return <Tag color="green">Online</Tag>;
+    const columns: ColumnsType<CompositeMeetingStudent> = [
+        {
+            title: t("الاسم", "Name"),
+            dataIndex: ["meeting", "name"],
         },
-    },
-    {
-        title: t("التاريخ", "Date"),
-        dataIndex: ["meeting", "date"],
-    },
 
-    {
-        title: t("عرض", "Show"),
-        dataIndex: "",
-        render: (model: CompositeMeetingStudent) => {
-            const embededLink =
-                model.studentVideoNumber !== undefined &&
-                model.studentVideoNumber !== -1
-                    ? model.meeting.videos[model.studentVideoNumber]
-                    : null;
-            return embededLink ? (
-                <Button>
-                    <a
-                        href={`/show-meeting?embededLink=${embededLink}`}
-                        target="_blank"
-                    >
-                        {t("عرض الجلسة", "Show Meeting")}
-                    </a>
-                </Button>
-            ) : (
-                <span>{t("لا يوجد","Not found")}</span>
-            );
+        {
+            title: t("الحالة", "State"),
+            dataIndex: ["meeting", "state"],
+            render: (state) => {
+                if (state === "offline") return <Tag>Offline</Tag>;
+                return <Tag color="green">Online</Tag>;
+            },
         },
-    },
-];
+        {
+            title: t("التاريخ", "Date"),
+            dataIndex: ["meeting", "date"],
+        },
+
+        {
+            title: t("عرض", "Show"),
+            dataIndex: "",
+            render: (model: CompositeMeetingStudent) => {
+                const embededLink =
+                    model.studentVideoNumber !== undefined &&
+                    model.studentVideoNumber !== -1
+                        ? model.meeting.videos[model.studentVideoNumber]
+                        : null;
+                return embededLink ? (
+                    <Button>
+                        <a
+                            href={`/show-meeting?embededLink=${embededLink}`}
+                            target="_blank"
+                        >
+                            {t("عرض الجلسة", "Show Meeting")}
+                        </a>
+                    </Button>
+                ) : (
+                    <span>{t("لا يوجد", "Not found")}</span>
+                );
+            },
+        },
+    ];
 
     return (
         <div className="container">
@@ -102,7 +102,12 @@ const columns: ColumnsType<CompositeMeetingStudent> = [
                     {t("جلسات", "Meetings of")} {student.firstName}{" "}
                     {student.secondName}
                 </h2>
-                <Table className="overflow-x-auto" pagination={false} columns={columns} dataSource={data} />
+                <Table
+                    className="overflow-x-auto"
+                    pagination={false}
+                    columns={columns}
+                    dataSource={data}
+                />
             </div>
         </div>
     );

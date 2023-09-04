@@ -10,6 +10,7 @@ class Student extends Model
     use HasFactory;
 
     public $fillable = [
+        'avatar_path',
         'firstName',
         'secondName',
         'phone',
@@ -23,6 +24,11 @@ class Student extends Model
         'is_in_exam',
         'score',
         'start_time',
+        'address',
+        'zip_code',
+        'city',
+        'arabic_first_name',
+        'arabic_second_name',
     ];
 
     public $timestamps = false;

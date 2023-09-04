@@ -45,13 +45,17 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // dump($request->all());
-        // exit;
         $validated = $request->validate([
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email' => 'required|email',
             'password' => 'required',
             'firstName' => 'required|string|max:60',
             'secondName' => 'required|string|max:60',
+            'arabic_first_name' => 'required|string|max:60',
+            'arabic_second_name' => 'required|string|max:60',
+            'address' => 'nullable|string|max:60',
+            'zip_code' => 'nullable|string|max:60',
+            'city' => 'required|string|max:60',
             'phone' => 'required|string',
             'birthday' => 'required|date',
             'gender' => ['required', Rule::in(['male', 'female'])],
@@ -60,6 +64,9 @@ class StudentController extends Controller
             'secondLanguage' => 'required|string',
             'level' => ['required', Rule::in(['beginner', 'moderate', 'advanced'])],
         ]);
+        if ($request->hasFile('avatar')) {
+            $validated['avatar_path'] = $request->file('avatar')->store('public/avatars');
+        }
         $student = Student::create($validated);
         $user = User::create([
             'name' => $validated['firstName'],
@@ -69,7 +76,7 @@ class StudentController extends Controller
             'active' => false,
         ]);
         event(new Registered($user));
-        return back();
+        return Redirect::route('login');
     }
 
     /**

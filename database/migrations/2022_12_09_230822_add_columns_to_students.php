@@ -29,10 +29,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->dropColumn('can_exam');
-            $table->dropColumn('is_in_exam');
-            $table->dropColumn('start_time');
-            $table->dropColumn('score');
+            $table->dropColumn(['can_exam', 'is_in_exam', 'start_time', 'score']);
         });
     }
 };

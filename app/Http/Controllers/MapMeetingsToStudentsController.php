@@ -12,7 +12,7 @@ class MapMeetingsToStudentsController extends Controller
     function editableStudentsTable()
     {
         return Inertia::render('StudentsMeetings/EditableStudentsTable', [
-            'students' => Student::select(['id', 'firstName', 'secondName',  'show_meetings'])->get(),
+            'students' => Student::select(['id',  'firstName', 'secondName',  'show_meetings'])->get(),
         ]);
     }
 
@@ -43,7 +43,7 @@ class MapMeetingsToStudentsController extends Controller
     function showStudentsTable()
     {
         return Inertia::render('StudentsMeetings/StudentsTable', [
-            'students' => Student::select(['id', 'firstName', 'secondName',  'show_meetings'])
+            'students' => Student::select(['id', 'avatar_path', 'firstName', 'secondName', 'arabic_first_name', 'arabic_second_name',  'show_meetings'])
                 ->where('show_meetings', 1)->get(),
         ]);
     }
@@ -52,7 +52,7 @@ class MapMeetingsToStudentsController extends Controller
     {
         return Inertia::render('StudentsMeetings/StudentMeetings', [
             'student' => $student,
-            'meetings' => Meeting::all(),
+            'meetings' => Meeting::orderBy('date')->get(),
         ]);
     }
 

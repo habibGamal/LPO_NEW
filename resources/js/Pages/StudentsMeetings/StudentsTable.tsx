@@ -9,9 +9,11 @@ interface StudentDB {
     id: number;
     firstName: string;
     secondName: string;
+    arabic_first_name: string;
+    arabic_second_name: string;
+    avatar_path: string;
     show_meetings: string;
 }
-
 
 export default function StudentsTable({ students }: { students: StudentDB[] }) {
     const t = useTranslate();
@@ -19,19 +21,31 @@ export default function StudentsTable({ students }: { students: StudentDB[] }) {
         {
             title: t("الاسم", "Name"),
             dataIndex: "",
+            render: (student: StudentDB) => {
+                const avatarPath = student.avatar_path? "/storage/" + student.avatar_path.replace("public/", "")
+                : "/images/default-avatar.png";
+                return <img className="w-16 rounded-full" src={avatarPath} alt="" />;
+            },
+        },
+        {
+            title: t("الاسم", "Name"),
+            dataIndex: "",
             render: (student: StudentDB) => (
                 <span>
-                    {student.firstName} {student.secondName}
+                    {t(
+                        ` ${student.arabic_first_name} ${student.arabic_second_name}`,
+                        `${student.firstName} ${student.secondName}`
+                    )}
                 </span>
             ),
         },
         {
-            title: t("عرض الجلسات","Show his meetings"),
+            title: t("عرض الجلسات", "Show his meetings"),
             dataIndex: "",
             render: (student: StudentDB) => (
                 <Button>
                     <Link href={`/student-meetings/${student.id}`}>
-                        {t("عرض الجلسات","Show his meetings")}
+                        {t("عرض الجلسات", "Show his meetings")}
                     </Link>
                 </Button>
             ),
@@ -41,7 +55,7 @@ export default function StudentsTable({ students }: { students: StudentDB[] }) {
         <div className="container">
             <div className="my-8">
                 <h2 className="text-2xl lg:text-4xl my-8 font-sans">
-                    {t("جلسات الطلاب","Students Meetings")}
+                    {t("جلسات الطلاب", "Students Meetings")}
                 </h2>
                 <Table
                     pagination={false}

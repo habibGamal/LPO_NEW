@@ -185,7 +185,7 @@ const Nav = () => {
                         <NavLinkAction
                             divider
                             href="/quiz"
-                            content={t("الامتحانات", "Quiz")}
+                            content={t("الامتحانات", "Exams")}
                         />
                     </Auth>
                     {/* <NavLink onClick={hideNav} href="/images_show" name={t('الصور', 'Images')} /> */}
