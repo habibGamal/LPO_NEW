@@ -65,7 +65,7 @@ class StudentController extends Controller
             'level' => ['required', Rule::in(['beginner', 'moderate', 'advanced'])],
         ]);
         if ($request->hasFile('avatar')) {
-            $validated['avatar_path'] = $request->file('avatar')->store('public/avatars');
+            $validated['avatar_path'] = $request->file('avatar')->store('public/images');
         }
         $student = Student::create($validated);
         $user = User::create([

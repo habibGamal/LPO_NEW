@@ -1,1 +1,0 @@
-import{r as a}from"./app.11755cce.js";function c(){const[s,e]=a.exports.useState({isOpen:!1,data:null});return[s,()=>{e(t=>({...t,isOpen:!0}))},()=>{e(t=>({...t,isOpen:!1}))},t=>{e(r=>({isOpen:!0,data:t}))}]}export{c as u};

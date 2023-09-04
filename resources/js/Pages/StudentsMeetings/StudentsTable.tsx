@@ -19,12 +19,12 @@ export default function StudentsTable({ students }: { students: StudentDB[] }) {
     const t = useTranslate();
     const columns: ColumnsType<StudentDB> = [
         {
-            title: t("الاسم", "Name"),
+            title: t("الصورة", "Image"),
             dataIndex: "",
             render: (student: StudentDB) => {
                 const avatarPath = student.avatar_path? "/storage/" + student.avatar_path.replace("public/", "")
                 : "/images/default-avatar.png";
-                return <img className="w-16 rounded-full" src={avatarPath} alt="" />;
+                return <img className="w-16 aspect-square object-cover rounded-full" src={avatarPath} alt="" />;
             },
         },
         {
