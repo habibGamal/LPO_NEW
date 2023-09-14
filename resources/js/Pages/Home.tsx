@@ -146,6 +146,18 @@ export default function Home() {
                 </div>
             </section>
             <Contact />
+            {t(
+                <video key="arabic" className="w-full" autoPlay loop muted>
+                    <source src="/videos/lpo_arabic.mp4" type="video/mp4" />
+                </video>,
+
+                <video key="english" className="w-full" autoPlay loop muted>
+                    <source
+                        src="/videos/lpo_english.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            )}
         </>
     );
 }
